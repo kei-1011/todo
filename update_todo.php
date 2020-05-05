@@ -96,8 +96,11 @@ exit();
     </div>
 
     <div class="btn-wrap">
-      <button type="submit" class="button delete_todo" name="delete" value="delete">削除</button>
+    <a href="index.php" class="back">戻る</a>
+    <div class="right">
       <button type="submit" class="button btn__update-todo" name="update" value="update">更新</button>
+      <button type="submit" class="button delete_todo" name="delete" value="delete">削除</button>
+    </div>
     </div>
   </form>
 </div><!--container-->

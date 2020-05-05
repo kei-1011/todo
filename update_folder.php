@@ -43,8 +43,11 @@ if($_POST['update']) {
       <input type="text" name="title" id="title" class="input-text" value="<?php echo $response[0]['title'];?>">
     </div>
     <div class="btn-wrap">
+    <a href="index.php" class="back">戻る</a>
+    <div class="right">
       <button type="submit" class="button delete_todo" name="delete" value="delete">削除</button>
       <button type="submit" class="button btn__update-todo" name="update" value="update">更新</button>
+    </div>
     </div>
   </form>
 </div><!--container-->

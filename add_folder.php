@@ -28,6 +28,7 @@ if(isset($_POST['title'])) {
       <input type="text" name="title" id="title" class="input-text">
     </div>
     <div class="btn-wrap">
+      <a href="index.php" class="back">戻る</a>
       <button type="submit" class="button btn__add-folder" name="create">追加</button>
     </div>
   </form>

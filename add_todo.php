@@ -50,6 +50,7 @@ if(isset($_POST['title'])) {
       </select>
     </div>
     <div class="btn-wrap">
+      <a href="index.php" class="back">戻る</a>
       <button type="submit" class="button btn__add-todo" name="create">追加</button>
     </div>
   </form>

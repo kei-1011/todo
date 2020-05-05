@@ -98,8 +98,13 @@ body {
 }
 
 .header__logo {
-  color: #fff;
+  display: inline-block;
+  color: #eee;
   font-size: 24px;
+  transition:opacity 0.4s;
+}
+.header__logo:hover {
+  opacity: 0.7;
 }
 
 .header__menu {
@@ -108,7 +113,13 @@ body {
 
 .header__item a {
   display: block;
-  color: #fff;
+  color: #eee;
+  text-decoration: underline;
+  text-decoration-color: #eee;
+  transition:all 0.4s;
+}
+.header__item a:hover {
+  opacity: 0.8;
 }
 
 /*  input form
@@ -240,7 +251,7 @@ td.todo__list--time.over {
 
 /* 編集ボタン */
 .update_todo {
-  color:#02aaff;
+  color:#0566D6;
   text-decoration: underline;
 }
 .update_todo:hover {
@@ -271,7 +282,7 @@ td.todo__list--time.over {
 
 .folder .folder-item .folder-update{
   text-decoration: underline;
-  color: #02aaff;
+  color: #0566D6;
   font-size: 13px;
 }
 .folder .folder-item .folder-link{
@@ -294,11 +305,11 @@ td.todo__list--time.over {
   background-color: #777;
 }
 .folder .folder-item .folder-link:hover{
-  background-color: #02aaff;
+  background-color: #0566D6;
   color:#fff;
 }
 .folder .folder-item .folder-link.current{
-  background-color: #02aaff;
+  background-color: #0566D6;
   color:#fff;
   font-weight: bold;
 }
@@ -340,9 +351,14 @@ td.todo__list--time.over {
 
 .add_todo form .btn-wrap {
   margin-top: 30px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 
+.btn-wrap .back {
+  color:#0566D6;
+  text-decoration: underline;
+}
 
 .error {
   color:red;
