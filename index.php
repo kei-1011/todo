@@ -4,7 +4,7 @@ require_once('header.php');
 
 // 登録したタスクをリスト表示させる
 $dbh->query('SET NAMES utf8');
-$sql = 'SELECT * FROM task ORDER BY due_date ASC';
+$sql = 'SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $tasks = $stmt->fetchAll();
