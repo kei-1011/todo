@@ -75,7 +75,7 @@ $dbh = null;
         if($timestamp2 < $timestamp) {
           $period = 'over';
 
-        } else if ((($timestamp2 - $timestamp)/60/60) < 60){
+        } else if ((($timestamp2 - $timestamp)/60) < 60){
           $period = 'one_hour';
         // 期限をオーバーしたら赤字にする
         }
