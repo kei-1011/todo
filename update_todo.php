@@ -1,4 +1,3 @@
-
 <?php
 require_once('header.php');
 /*  status
@@ -67,7 +66,7 @@ exit();
 <main class="add_todo">
 <div class="container">
 <h2 class="mb-3">タスクを編集する</h2>
-  <form action="" method="post"　onsubmit="return confirm_test()">
+  <form action="" method="post">
     <div class="row">
       <label for="title">タイトル</label>
       <input type="text" name="title" id="title" class="input-text" value="<?php echo $res[0]['title'];?>">
@@ -108,10 +107,6 @@ exit();
 <script src="./lib/build/jquery.datetimepicker.full.min.js"></script>
 <script>
 $(function() {
-  function confirm() {
-    var select = confirm("タスクを削除しますか？\n「OK」で削除\n「キャンセル」で中止");
-    return select;
-  }
   $('#datetimepicker').datetimepicker();
 });
 </script>
