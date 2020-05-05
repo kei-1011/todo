@@ -328,7 +328,7 @@ td.todo__list--time.over {
 /* update
 -----------------------------------------------*/
 
-select.status {
+select {
   width: 100%;
   display: block;
   height: 40px;

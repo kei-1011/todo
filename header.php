@@ -4,6 +4,7 @@ session_start();
 //セッションスタート
 require_once(__DIR__ . '/include/config.php');
 require_once(__DIR__ . '/include/functions.php');
+date_default_timezone_set('Asia/Tokyo');
 
 ?>
 <!DOCTYPE html>
