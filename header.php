@@ -25,6 +25,8 @@ date_default_timezone_set('Asia/Tokyo');
   <a href="index.php" class="header__logo">TodoApp</a>
   <nav class="header__nav">
     <ul class="header__menu">
+    　<li class="header__item"><a href="add_todo.php">タスク追加</a></li>
+    　<li class="header__item"><a href="add_folder.php">フォルダ追加</a></li>
     　<li class="header__item"><a href="">ログアウト</a></li>
     </ul>
   </nav>

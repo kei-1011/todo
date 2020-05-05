@@ -28,19 +28,15 @@ $dbh = null;
 <div id="container" class="container">
   <div class="todo-list">
   <div class="folder">
-    <a href="add_folder.php" class="btn-add">フォルダ追加</a>
     <ul class="folder-list">
-    <li class="folder-item"><a href="index.php" class="<?php if(empty($folder_id)){ echo "current";}?>">全てのフォルダ</a></li>
+    <li class="folder-item"><a href="index.php" class="folder-link full <?php if(empty($folder_id)){ echo "current";}?>">全てのフォルダ</a></li>
     <?php foreach($folders as $folder){?>
-      <li class="folder-item"><a href="folder.php?folder_id=<?php echo $folder['id'];?>" class="<?php if($folder_id == $folder['id']) { echo 'current'; }?>"><?php echo $folder['title'];?></a></li>
+      <li class="folder-item"><a href="folder.php?folder_id=<?php echo $folder['id'];?>" class="folder-link <?php if($folder_id == $folder['id']) { echo 'current'; }?>"><?php echo $folder['title'];?></a><a href="update_folder.php?folder_id=<?php echo $folder['id'];?>" class="folder-update">編集</a></li>
     <?php }?>
     </ul>
   </div>
 
     <div id="todos" class="todos">
-      <div class="form-group">
-        <a href="add_todo.php" class="btn-add">タスク追加</a>
-      </div>
       <table class="todo__list">
         <thead>
           <tr>

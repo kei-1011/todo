@@ -269,21 +269,35 @@ td.todo__list--time.over {
   box-shadow: 1px 2px 16px #ccc;
 }
 
-.folder .folder-list {
-  padding: 16px;
+.folder .folder-item .folder-update{
+  text-decoration: underline;
+  color: #02aaff;
+  font-size: 13px;
 }
-
-.folder .folder-item a{
+.folder .folder-item .folder-link{
   margin-bottom: 5px;
-  padding: 5px;
-  display: block;
-  transition:background 0.4s;
+  padding: 5px 10px;
+  display: inline-block;
+  transition: background 0.4s;
+  width: 120px;
+  margin-right: 10px;
+  box-sizing: border-box;
 }
-.folder .folder-item a:hover{
+.folder .folder-item .folder-link.full{
+  display: block;
+  width: 100%;
+}
+.folder .folder-item .folder-link.full:hover{
+  background-color: #777;
+}
+.folder .folder-item .folder-link.full.current{
+  background-color: #777;
+}
+.folder .folder-item .folder-link:hover{
   background-color: #02aaff;
   color:#fff;
 }
-.folder .folder-item a.current{
+.folder .folder-item .folder-link.current{
   background-color: #02aaff;
   color:#fff;
   font-weight: bold;
