@@ -2,20 +2,26 @@
 <?php
 require_once('header.php');
 
+if(isset($_GET['folder_id'])) {
+  $folder_id = $_GET['folder_id'];
+} else {
+  $folder_id = '';
+}
+
+
 // 登録したタスクをリスト表示させる
 $dbh->query('SET NAMES utf8');
-$sql = 'SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC';
+$sql = "SELECT * FROM task WHERE status <> 2 AND folder_id = '$folder_id' ORDER BY due_date ASC";
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $tasks = $stmt->fetchAll();
 
-$sql_folder = 'SELECT * FROM folder ORDER BY created_at ASC';
+$sql_folder = 'SELECT * FROM folder ORDER BY id ASC';
 $statement = $dbh->prepare($sql_folder);
 $statement->execute();
 $folders = $statement->fetchAll();
 
 $dbh = null;
-
 ?>
 
 <main class="top">
@@ -24,9 +30,9 @@ $dbh = null;
   <div class="folder">
     <a href="add_folder.php" class="btn-add">フォルダ追加</a>
     <ul class="folder-list">
-    <li class="folder-item"><a href="index.php">全てのタスク</a></li>
+    <li class="folder-item"><a href="index.php" class="<?php if(empty($folder_id)){ echo "current";}?>">全てのフォルダ</a></li>
     <?php foreach($folders as $folder){?>
-      <li class="folder-item"><a href="folder.php?id=<?php echo $folder['id'];?>"><?php echo $folder['title'];?></a></li>
+      <li class="folder-item"><a href="folder.php?folder_id=<?php echo $folder['id'];?>" class="<?php if($folder_id == $folder['id']) { echo 'current'; }?>"><?php echo $folder['title'];?></a></li>
     <?php }?>
     </ul>
   </div>

@@ -24,7 +24,6 @@ $dbh = null;
 
 if($_SERVER ['REQUEST_METHOD'] == 'POST') {
 
-
 $status = h($_POST['status']);
 $title = h($_POST['title']);
 $due_date = h($_POST['due_date']);
@@ -52,7 +51,6 @@ if($status === '1') {
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dbh = null;
-
 
 
 header('Location:index.php');

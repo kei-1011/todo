@@ -6,7 +6,6 @@ $statement = $dbh->prepare($sql_folder);
 $statement->execute();
 $folders = $statement->fetchAll();
 
-
 if(isset($_POST['title'])) {
 
   $error = '';
