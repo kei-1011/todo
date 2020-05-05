@@ -8,7 +8,6 @@ $sql = 'SELECT * FROM task ORDER BY due_date ASC';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $tasks = $stmt->fetchAll();
-// $dbh = null;
 
 $sql_folder = 'SELECT * FROM folder ORDER BY created_at ASC';
 $statement = $dbh->prepare($sql_folder);
@@ -16,21 +15,6 @@ $statement->execute();
 $folders = $statement->fetchAll();
 
 $dbh = null;
-
-
-
-
-// 今日の日付
-$date = date("Y-m-d");
-e($date);
-
-// created の日付
-$str_created = strtotime($tasks[0]['created']);
-echo(date('Y-m-d',$str_created));
-
-// 期限の日付
-$str_due = strtotime($tasks[0]['due_date']);
-echo(date('Y-m-d',$str_due));
 
 ?>
 
@@ -69,10 +53,30 @@ echo(date('Y-m-d',$str_due));
         } else if ($task['status'] === '3') {
           $status = '保留';
         }
+
+        // タスク期限の管理
+        date_default_timezone_set('Asia/Tokyo');
+        $date = new DateTime();
+        $due_date = $task['due_date'];
+        $now_date = $date->format('Y-m-d H:i:s');
+
+        // 現在時刻とタスクに設定した期限の日時を取得
+        $timestamp = strtotime($now_date);
+        $timestamp2 = strtotime($due_date);
+
+        // 1時間以内であれば警告を表示
+        $period = '';
+        if($timestamp2 < $timestamp) {
+          $period = 'over';
+
+        } else if ((($timestamp2 - $timestamp)/60/60) < 60){
+          $period = 'one_hour';
+        // 期限をオーバーしたら赤字にする
+        }
         ?>
         <tr>
           <td class="todo__list--title"><?php echo $task['title']; ?></td>
-          <td class="todo__list--time"><?php echo $task['due_date']; ?></td>
+          <td class="todo__list--time <?php echo $period; ?>"><?php echo $due_date; ?></td>
           <td class="todo__list--delete"><?php echo $status; ?></td>
           <td class="todo__list--update"><a href="update_todo.php?id=<?php echo $task['id'];?>" class="update_todo">編集</a></td>
         </tr>

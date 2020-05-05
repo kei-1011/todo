@@ -90,7 +90,7 @@ body {
 }
 
 .inner {
-  width: 960px;
+  width: 1180px;
   max-width: 100%;
   margin: 0 auto;
   display: flex;
@@ -204,6 +204,15 @@ body {
 }
 .todo__list--update{
   width: 60px;
+}
+
+td.todo__list--time.one_hour {
+  color:#ffa101;
+  font-weight: bold;
+}
+td.todo__list--time.over {
+  color:#eb3f60;
+  font-weight: bold;
 }
 
 .btn {
