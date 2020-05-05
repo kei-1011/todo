@@ -273,8 +273,20 @@ td.todo__list--time.over {
   padding: 16px;
 }
 
-.folder .folder-item {
-  margin-bottom: 10px;
+.folder .folder-item a{
+  margin-bottom: 5px;
+  padding: 5px;
+  display: block;
+  transition:background 0.4s;
+}
+.folder .folder-item a:hover{
+  background-color: #02aaff;
+  color:#fff;
+}
+.folder .folder-item a.current{
+  background-color: #02aaff;
+  color:#fff;
+  font-weight: bold;
 }
 
 
@@ -328,7 +340,7 @@ td.todo__list--time.over {
 /* update
 -----------------------------------------------*/
 
-select.status {
+select {
   width: 100%;
   display: block;
   height: 40px;

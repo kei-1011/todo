@@ -2,9 +2,16 @@
 <?php
 require_once('header.php');
 
+if(isset($_GET['folder_id'])) {
+  $folder_id = $_GET['folder_id'];
+} else {
+  $folder_id = '';
+}
+
+
 // 登録したタスクをリスト表示させる
 $dbh->query('SET NAMES utf8');
-$sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
+$sql = "SELECT * FROM task WHERE status <> 2 AND folder_id = '$folder_id' ORDER BY due_date ASC";
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $tasks = $stmt->fetchAll();
