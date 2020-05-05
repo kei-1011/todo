@@ -1,7 +1,12 @@
 
 <?php
 require_once('header.php');
-
+/*  status
+0 未着手
+1 着手
+2 完了
+3 保留
+*/
 $id = $_GET['id'];
 $dbh->query('SET NAMES utf8');
 $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";
@@ -13,22 +18,13 @@ $sql_folder = "SELECT id,title FROM folder";
 $statement = $dbh->prepare($sql_folder);
 $statement->execute();
 $response = $statement->fetchAll();
-$dbh = null;
 
-/*  status
-0 未着手
-1 着手
-2 完了
-3 保留
-*/
-
-if($_SERVER ['REQUEST_METHOD'] == 'POST') {
+if($_POST['update']) {
 
 $status = h($_POST['status']);
 $title = h($_POST['title']);
 $due_date = h($_POST['due_date']);
 $folder_id = h($_POST['folder_id']);
-$dbh = new PDO('mysql:dbname=todo_app;host=localhost;charset=utf8', 'root', 'root');
 
 if($status === '1') {
   $date = new DateTime();
@@ -52,16 +48,26 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 $dbh = null;
 
-
 header('Location:index.php');
 exit();
+
+} else if($_POST['delete']) {
+
+  $sql = 'DELETE FROM task WHERE id=?';
+  $data[] = $id;
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $dbh = null;
+
+  header('Location:index.php');
+  exit();
 }
 ?>
 
 <main class="add_todo">
 <div class="container">
 <h2 class="mb-3">タスクを編集する</h2>
-  <form action="" method="post">
+  <form action="" method="post"　onsubmit="return confirm_test()">
     <div class="row">
       <label for="title">タイトル</label>
       <input type="text" name="title" id="title" class="input-text" value="<?php echo $res[0]['title'];?>">
@@ -91,18 +97,21 @@ exit();
     </div>
 
     <div class="btn-wrap">
-      <button type="submit" class="button btn__update-todo">更新</button>
+      <button type="submit" class="button delete_todo" name="delete" value="delete">削除</button>
+      <button type="submit" class="button btn__update-todo" name="update" value="update">更新</button>
     </div>
-    <input type="hidden" name="update">
   </form>
 </div><!--container-->
 </main>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="./lib/jquery.js"></script>
 <script src="./lib/build/jquery.datetimepicker.full.min.js"></script>
 <script>
 $(function() {
+  function confirm() {
+    var select = confirm("タスクを削除しますか？\n「OK」で削除\n「キャンセル」で中止");
+    return select;
+  }
   $('#datetimepicker').datetimepicker();
 });
 </script>
