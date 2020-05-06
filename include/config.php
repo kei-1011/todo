@@ -1,6 +1,7 @@
 <?php
 
 // ini_set('display_errors', 1); //エラー表示
+
 date_default_timezone_set('Asia/Tokyo');
 
 define('DSN', 'mysql:dbname=todo_app;host=localhost;charset=utf8');
@@ -12,3 +13,5 @@ try {
 } catch (PDOException $e) {
   print('DB接続エラー:' . $e->getMessage());
 }
+
+session_start();
