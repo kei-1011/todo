@@ -25,9 +25,9 @@ class Folder {
   }
 
   public function getFolder() {
-  $id = $_GET['folder_id'];
+  $folder_id = $_GET['folder_id'];
 
-  $sql = "SELECT id,title FROM folder WHERE id = '$id'";
+  $sql = "SELECT id,title FROM folder WHERE id = '$folder_id'";
   $stmt = $this->_db->prepare($sql);
   $stmt->execute();
   $res = $stmt->fetchAll();
@@ -48,12 +48,12 @@ class Folder {
   }
 
   public function _update() {
-    $id = $_GET['folder_id'];
+    $folder_id = $_GET['folder_id'];
 
     $title = h($_POST['title']);
     $sql = 'UPDATE folder SET title=? WHERE id=?';
     $data[] = $title;
-    $data[] = $id;
+    $data[] = $folder_id;
     $stmt = $this->_db->prepare($sql);
     $stmt->execute($data);
 
@@ -77,10 +77,10 @@ class Folder {
   }
 
   public function _delete() {
-    $id = $_GET['folder_id'];
+    $folder_id = $_GET['folder_id'];
 
     $sql = 'DELETE FROM folder WHERE id=?';
-    $data[] = $id;
+    $data[] = $folder_id;
     $stmt = $this->_db->prepare($sql);
     $stmt->execute($data);
     $dbh = null;

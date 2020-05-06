@@ -1,12 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
-/*  status
-0 未着手
-1 着手
-2 完了
-3 保留
-*/
-
 
 $todo = new Todo();
 $folder = new Folder();

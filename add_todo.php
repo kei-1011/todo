@@ -6,7 +6,6 @@ $todo = new Todo();
 $folder = new Folder();
 $folders = $folder->getAll();
 $todo->post();
-
 ?>
 
 <main class="add_todo">
