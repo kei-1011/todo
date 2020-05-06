@@ -24,7 +24,7 @@ $folders = $folder->getAll();
           <tr>
             <th class="todo__list--title">タイトル</th>
             <th class="todo__list--time">完了日時</th>
-            <th class="todo__list--update">状態</th>
+            <th class="todo__list--update">作業時間</th>
           </tr>
         </thead>
         <tbody>

@@ -11,8 +11,14 @@
 
         // タスク期限の管理
         $date = new DateTime();
-        $due_date = $task['due_date'];
-        $now_date = $date->format('Y-m-d H:i:s');
+        $created = strtotime($task['created']);  // 最新の更新日
+        $proceed = strtotime($task['proceed_date']);   // 着手日
+
+        // 作業時間を計算
+        $work_diff = ceil(($created - $proceed)/60);
+
+        $due_date = $task['due_date'];    //期限
+        $now_date = $date->format('Y-m-d H:i:s');   //現在日時
 
         // 現在時刻とタスクに設定した期限の日時を取得
         $timestamp = strtotime($now_date);
@@ -30,8 +36,15 @@
         ?>
         <tr>
           <td class="todo__list--title"><?php echo $task['title']; ?></td>
-          <td class="todo__list--time <?php echo $period; ?>"><?php if($task['status'] === '2'){ echo $task['created']; }else { echo $due_date; }?></td>
-          <td class="todo__list--delete"><?php echo $status; ?></td>
+          <td class="todo__list--time <?php if($task['status'] !== '2'){ echo $period; } ?>">
+            <?php if($task['status'] === '2'){ echo $task['created']; }else { echo $due_date; }?></td>
+          <td class="todo__list--delete">
+          <?php if($task['status'] === '2'){?>
+            <?php echo $work_diff?>分
+          <?php }else { ?>
+            <?php echo $status; ?>
+          <?php } ?>
+          </td>
           <td class="todo__list--update"><a href="update_todo.php?id=<?php echo $task['id'];?>" class="update_todo">編集</a></td>
         </tr>
         <?php } ?>
