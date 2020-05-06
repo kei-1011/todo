@@ -80,7 +80,7 @@ body {
   color: #fff;
 }
 
-/*  input form
+/*  header footer
 -----------------------------------------------*/
 
 .header {
@@ -121,6 +121,14 @@ body {
 .header__item a:hover {
   opacity: 0.8;
 }
+
+footer {
+  background-color: #333;
+  line-height: 50px;
+  text-align: center;
+  color:#eee;
+}
+
 
 /*  input form
 -----------------------------------------------*/

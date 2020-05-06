@@ -1,20 +1,13 @@
 
 <?php
-require_once('header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
 // 登録したタスクをリスト表示させる
-$dbh->query('SET NAMES utf8');
-$sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-$tasks = $stmt->fetchAll();
 
-$sql_folder = 'SELECT * FROM folder ORDER BY id ASC';
-$statement = $dbh->prepare($sql_folder);
-$statement->execute();
-$folders = $statement->fetchAll();
-
-$dbh = null;
+$todo = new Todo();
+$folder = new Folder();
+$tasks = $todo->getAll();
+$folders = $folder->getAll();
 ?>
 
 <main class="top">
@@ -31,9 +24,6 @@ $dbh = null;
   </div>
 
     <div id="todos" class="todos">
-      <!-- <div class="form-group">
-        <a href="add_todo.php" class="btn-add">タスク追加</a>
-      </div> -->
       <table class="todo__list">
         <thead>
           <tr>
@@ -86,7 +76,4 @@ $dbh = null;
   </div><!--todo-list-->
 </div><!--container-->
 </main>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
-</html>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>

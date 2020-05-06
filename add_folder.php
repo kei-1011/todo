@@ -1,22 +1,9 @@
 
 <?php
-require_once('header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
-if(isset($_POST['title'])) {
-
-  $title = h($_POST['title']);
-
-  $dbh->query('SET NAMES utf-8');
-  $sql = 'INSERT INTO folder(title) VALUES (?)';
-  $stmt = $dbh->prepare($sql);
-  $data[] = $title;
-  $stmt->execute($data);
-
-  $dbh = null;
-
-  header('Location:index.php');
-  exit();
-}
+$folder = new Folder();
+$folder->post();
 ?>
 
 <main class="add_todo">
@@ -29,18 +16,9 @@ if(isset($_POST['title'])) {
     </div>
     <div class="btn-wrap">
       <a href="index.php" class="back">戻る</a>
-      <button type="submit" class="button btn__add-folder" name="create">追加</button>
+      <button type="submit" class="button btn__add-folder" name="mode" value="create">追加</button>
     </div>
   </form>
 </div><!--container-->
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="./lib/jquery.js"></script>
-<script src="./lib/build/jquery.datetimepicker.full.min.js"></script>
-<script>
-$(function() {
-  $('#datetimepicker').datetimepicker();
-});
-</script>
-</body>
-</html>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>
