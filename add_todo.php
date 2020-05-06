@@ -1,31 +1,11 @@
 
 <?php
-require_once('header.php');
-$sql_folder = 'SELECT * FROM folder ORDER BY created_at ASC';
-$statement = $dbh->prepare($sql_folder);
-$statement->execute();
-$folders = $statement->fetchAll();
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
-if(isset($_POST['title'])) {
-
-  $error = '';
-  $folder_id = h($_POST['folder_id']);
-  $title = h($_POST['title']);
-  $due_date = h($_POST['due_date']);
-
-  $dbh->query('SET NAMES utf-8');
-  $sql = 'INSERT INTO task(folder_id,title,due_date) VALUES (?,?,?)';
-  $stmt = $dbh->prepare($sql);
-  $data[] = $folder_id;
-  $data[] = $title;
-  $data[] = $due_date;
-  $stmt->execute($data);
-
-  $dbh = null;
-
-  header('Location:index.php');
-  exit();
-}
+$todo = new Todo();
+$folder = new Folder();
+$folders = $folder->getAll();
+$todo->post();
 ?>
 
 <main class="add_todo">
@@ -50,18 +30,10 @@ if(isset($_POST['title'])) {
       </select>
     </div>
     <div class="btn-wrap">
-      <button type="submit" class="button btn__add-todo" name="create">追加</button>
+      <a href="index.php" class="back">戻る</a>
+      <button type="submit" class="button btn__add-todo" name="mode" value="create">追加</button>
     </div>
   </form>
 </div><!--container-->
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="./lib/jquery.js"></script>
-<script src="./lib/build/jquery.datetimepicker.full.min.js"></script>
-<script>
-$(function() {
-  $('#datetimepicker').datetimepicker();
-});
-</script>
-</body>
-</html>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>

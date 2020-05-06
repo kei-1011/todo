@@ -1,66 +1,12 @@
 <?php
-require_once('header.php');
-/*  status
-0 未着手
-1 着手
-2 完了
-3 保留
-*/
-$id = $_GET['id'];
-$dbh->query('SET NAMES utf8');
-$sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-$res = $stmt->fetchAll();
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
-$sql_folder = "SELECT id,title FROM folder";
-$statement = $dbh->prepare($sql_folder);
-$statement->execute();
-$response = $statement->fetchAll();
+$todo = new Todo();
+$folder = new Folder();
+$folders = $folder->getAll();
+$res = $todo->getTaskSortId();
+$todo->post();
 
-if($_POST['update']) {
-
-$status = h($_POST['status']);
-$title = h($_POST['title']);
-$due_date = h($_POST['due_date']);
-$folder_id = h($_POST['folder_id']);
-
-if($status === '1') {
-  $date = new DateTime();
-  $now_date = $date->format('Y-m-d H:i:s');
-  $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=?,proceed_date=? WHERE id=?';
-  $data[] = $folder_id;
-  $data[] = $title;
-  $data[] = $status;
-  $data[] = $due_date;
-  $data[] = $now_date;
-  $data[] = $id;
-} else {
-  $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=? WHERE id=?';
-  $data[] = $folder_id;
-  $data[] = $title;
-  $data[] = $status;
-  $data[] = $due_date;
-  $data[] = $id;
-}
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);
-$dbh = null;
-
-header('Location:index.php');
-exit();
-
-} else if($_POST['delete']) {
-
-  $sql = 'DELETE FROM task WHERE id=?';
-  $data[] = $id;
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-  $dbh = null;
-
-  header('Location:index.php');
-  exit();
-}
 ?>
 
 <main class="add_todo">
@@ -89,26 +35,20 @@ exit();
       <label for="folder_id">フォルダ</label>
       <select name="folder_id" id="folder_id" class="folder_id">
         <option value=""></option>
-      <?php foreach($response as $key => $value) { ?>
+      <?php foreach($folders as $key => $value) { ?>
         <option value="<?php echo $value['id'];?>" <?php if($value['id'] === $res[0]['folder_id']){ echo "selected"; }?>><?php echo $value['title']; ?></option>
       <?php } ?>
       </select>
     </div>
 
     <div class="btn-wrap">
-      <button type="submit" class="button delete_todo" name="delete" value="delete">削除</button>
-      <button type="submit" class="button btn__update-todo" name="update" value="update">更新</button>
+    <a href="index.php" class="back">戻る</a>
+    <div class="right">
+      <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
+      <button type="submit" class="button delete_todo" name="mode" value="delete">削除</button>
+    </div>
     </div>
   </form>
 </div><!--container-->
 </main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="./lib/jquery.js"></script>
-<script src="./lib/build/jquery.datetimepicker.full.min.js"></script>
-<script>
-$(function() {
-  $('#datetimepicker').datetimepicker();
-});
-</script>
-</body>
-</html>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>

@@ -1,10 +1,10 @@
 <?php
 
-session_start();
 //セッションスタート
-require_once(__DIR__ . '/include/config.php');
-require_once(__DIR__ . '/include/functions.php');
-date_default_timezone_set('Asia/Tokyo');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Todo.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Folder.php');
 
 ?>
 <!DOCTYPE html>
@@ -13,9 +13,9 @@ date_default_timezone_set('Asia/Tokyo');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'];?>/src/css/style.css">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="./lib/jquery.datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="<?php $_SERVER['DOCUMENT_ROOT'];?>/src/lib/jquery.datetimepicker.css">
 
 </head>
 

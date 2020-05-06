@@ -2,7 +2,6 @@
 
 /*  reset
 -----------------------------------------------*/
-
 *,
 *::before,
 *::after {
@@ -45,7 +44,7 @@ body {
   width: 1180px;
   max-width: 100%;
   margin: auto;
-  padding: 60px 0;
+  padding: 40px 0;
 
 }
 .top .container {
@@ -80,7 +79,7 @@ body {
   color: #fff;
 }
 
-/*  input form
+/*  header footer
 -----------------------------------------------*/
 
 .header {
@@ -98,8 +97,13 @@ body {
 }
 
 .header__logo {
-  color: #fff;
+  display: inline-block;
+  color: #eee;
   font-size: 24px;
+  transition:opacity 0.4s;
+}
+.header__logo:hover {
+  opacity: 0.7;
 }
 
 .header__menu {
@@ -108,36 +112,25 @@ body {
 
 .header__item a {
   display: block;
-  color: #fff;
+  color: #eee;
+  text-decoration: underline;
+  text-decoration-color: #eee;
+  transition:all 0.4s;
+}
+.header__item a:hover {
+  opacity: 0.8;
 }
 
-/*  input form
+footer {
+  background-color: #333;
+  line-height: 50px;
+  text-align: center;
+  color:#eee;
+}
+
+
+/* button
 -----------------------------------------------*/
-
-.todo-form {
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-.todo-form .form-group {
-  display: flex;
-  justify-content: center;
-}
-
-.new_todo {
-  padding: 8px;
-  border-radius: 3px;
-  width: 490px;
-  margin-right: 30px;
-  font-size: 16px;
-  border: none;
-  border-bottom: 1px solid #ccc;
-}
-.new_todo:focus {
-  outline: none;
-  border: 1px solid #eee;
-  box-shadow: 1px 2px 6px #ccc;
-}
 
 .button {
   display: inline-block;
@@ -160,10 +153,7 @@ body {
 }
 
 
-
-
-
-/*todo-list
+/* todo-list
 -----------------------------------------------*/
 
 .todo-list {
@@ -190,7 +180,6 @@ body {
 }
 
 .todo__list th {
-  font-weight: normal;
   text-align: left;
   font-size: 14px;
 }
@@ -240,21 +229,13 @@ td.todo__list--time.over {
 
 /* 編集ボタン */
 .update_todo {
-  color:#02aaff;
+  color:#0566D6;
   text-decoration: underline;
 }
 .update_todo:hover {
   opacity:0.8;
 }
 
-/* 追加用テンプレート */
-#todo_template {
-  display: none;
-}
-
-#done_template {
-  display: none;
-}
 
 
 /* folder
@@ -271,7 +252,7 @@ td.todo__list--time.over {
 
 .folder .folder-item .folder-update{
   text-decoration: underline;
-  color: #02aaff;
+  color: #0566D6;
   font-size: 13px;
 }
 .folder .folder-item .folder-link{
@@ -283,29 +264,31 @@ td.todo__list--time.over {
   margin-right: 10px;
   box-sizing: border-box;
 }
-.folder .folder-item .folder-link.full{
+.folder .folder-item .folder-link.full,
+.folder .folder-item .folder-link.full-done{
   display: block;
   width: 100%;
 }
-.folder .folder-item .folder-link.full:hover{
-  background-color: #777;
-}
+
+.folder .folder-item .folder-link.full:hover,
 .folder .folder-item .folder-link.full.current{
   background-color: #777;
 }
+
+.folder .folder-item .folder-link.full-done:hover,
+.folder .folder-item .folder-link.full-done.current{
+  background-color: #eb3f60;
+}
+
 .folder .folder-item .folder-link:hover{
-  background-color: #02aaff;
+  background-color: #0566D6;
   color:#fff;
 }
 .folder .folder-item .folder-link.current{
-  background-color: #02aaff;
+  background-color: #0566D6;
   color:#fff;
   font-weight: bold;
 }
-
-
-
-
 
 
 /* add_todo
@@ -340,9 +323,14 @@ td.todo__list--time.over {
 
 .add_todo form .btn-wrap {
   margin-top: 30px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 
+.btn-wrap .back {
+  color:#0566D6;
+  text-decoration: underline;
+}
 
 .error {
   color:red;
@@ -361,6 +349,19 @@ select {
   font-size: 18px;
   background-color: #fff;
   border:1px solid #ccc;
+}
+
+
+/* done
+-----------------------------------------------*/
+
+.done_container {
+  width: 100%;
+  margin-top: 40px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 1px 2px 16px #ccc;
 }
 
 
