@@ -26,6 +26,16 @@ class Todo {
   }
 
 
+
+  public function getDoneTask() {
+    $sql = "SELECT * FROM task WHERE status = 2 ORDER BY created ASC";
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll();
+    return $res;
+  }
+
+
   public function getTaskSortId() {
     $id = $_GET['id'];
     $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";

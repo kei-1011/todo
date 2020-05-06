@@ -44,7 +44,7 @@ body {
   width: 1180px;
   max-width: 100%;
   margin: auto;
-  padding: 60px 0;
+  padding: 40px 0;
 
 }
 .top .container {
@@ -180,7 +180,6 @@ footer {
 }
 
 .todo__list th {
-  font-weight: normal;
   text-align: left;
   font-size: 14px;
 }
@@ -265,16 +264,22 @@ td.todo__list--time.over {
   margin-right: 10px;
   box-sizing: border-box;
 }
-.folder .folder-item .folder-link.full{
+.folder .folder-item .folder-link.full,
+.folder .folder-item .folder-link.full-done{
   display: block;
   width: 100%;
 }
-.folder .folder-item .folder-link.full:hover{
-  background-color: #777;
-}
+
+.folder .folder-item .folder-link.full:hover,
 .folder .folder-item .folder-link.full.current{
   background-color: #777;
 }
+
+.folder .folder-item .folder-link.full-done:hover,
+.folder .folder-item .folder-link.full-done.current{
+  background-color: #eb3f60;
+}
+
 .folder .folder-item .folder-link:hover{
   background-color: #0566D6;
   color:#fff;
@@ -344,6 +349,19 @@ select {
   font-size: 18px;
   background-color: #fff;
   border:1px solid #ccc;
+}
+
+
+/* done
+-----------------------------------------------*/
+
+.done_container {
+  width: 100%;
+  margin-top: 40px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 1px 2px 16px #ccc;
 }
 
 

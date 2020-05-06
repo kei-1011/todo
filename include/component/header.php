@@ -7,8 +7,6 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/include/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Todo.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Folder.php');
 
-date_default_timezone_set('Asia/Tokyo');
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">

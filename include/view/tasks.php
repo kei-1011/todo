@@ -30,7 +30,7 @@
         ?>
         <tr>
           <td class="todo__list--title"><?php echo $task['title']; ?></td>
-          <td class="todo__list--time <?php echo $period; ?>"><?php echo $due_date; ?></td>
+          <td class="todo__list--time <?php echo $period; ?>"><?php if($task['status'] === '2'){ echo $task['created']; }else { echo $due_date; }?></td>
           <td class="todo__list--delete"><?php echo $status; ?></td>
           <td class="todo__list--update"><a href="update_todo.php?id=<?php echo $task['id'];?>" class="update_todo">編集</a></td>
         </tr>

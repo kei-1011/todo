@@ -6,10 +6,12 @@ $todo = new Todo();
 $folder = new Folder();
 $tasks = $todo->getSortFolder();
 $folders = $folder->getAll();
+$get_folder = $folder->getFolder();
 
 ?>
 <main class="top">
 <div id="container" class="container">
+<h2 class="mb-3"><?php echo $get_folder[0]['title'];?>のタスク一覧</h2>
   <div class="todo-list">
     <div class="folder">
       <?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/view/folders.php');?>

@@ -1,4 +1,3 @@
-
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
@@ -6,13 +5,14 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
 
 $todo = new Todo();
 $folder = new Folder();
-$tasks = $todo->getAll();
+$tasks = $todo->getDoneTask();
 $folders = $folder->getAll();
 ?>
 
 <main class="top">
 <div id="container" class="container">
-  <h2 class="mb-3">タスク一覧</h2>
+<h2 class="mb-3">完了済のタスク一覧</h2>
+
   <div class="todo-list">
     <div class="folder">
       <?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/view/folders.php');?>
@@ -23,7 +23,7 @@ $folders = $folder->getAll();
         <thead>
           <tr>
             <th class="todo__list--title">タイトル</th>
-            <th class="todo__list--time">期限</th>
+            <th class="todo__list--time">完了日時</th>
             <th class="todo__list--update">状態</th>
           </tr>
         </thead>
