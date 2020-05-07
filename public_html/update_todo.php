@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
 $todo = new Todo();
 $folder = new Folder();
@@ -51,4 +51,4 @@ $todo->post();
   </form>
 </div><!--container-->
 </main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>

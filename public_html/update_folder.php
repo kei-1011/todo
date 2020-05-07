@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
 $folder = new Folder();
 $folders = $folder->getFolder();
@@ -25,4 +25,4 @@ $folder->post();
   </form>
 </div><!--container-->
 </main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>

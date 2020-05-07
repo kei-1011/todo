@@ -132,15 +132,26 @@ footer {
 /* button
 -----------------------------------------------*/
 
+.login-btn {
+  display: inline-block;
+  border-radius: 8px;
+  font-size: 14x;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1em;
+  color:#333;
+}
+
 .button {
   display: inline-block;
-  border-radius: 10%;
+  border-radius: 8px;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
   padding: 10px;
   background: #2cb696;
-  color: #ffffff;
+  color: #eee;
   line-height: 1em;
   transition: 0.3s;
   box-shadow: 1px 2px 6px #ccc;
@@ -152,6 +163,25 @@ footer {
   background: #fff;
 }
 
+
+.logout-btn {
+  display: inline-block;
+  border-radius:8px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #119CFE;
+  color:#eee;
+  transition:all 0.3s;
+  border:1px solid #119CFE;
+  font-weight: bold;
+}
+.logout-btn:hover {
+  border:1px solid #eee;
+  color:#119CFE;
+  background-color: #eee;
+}
 
 /* todo-list
 -----------------------------------------------*/
