@@ -1,6 +1,6 @@
 
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
 $todo = new Todo();
 $folder = new Folder();
@@ -14,7 +14,7 @@ $get_folder = $folder->getFolder();
 <h2 class="mb-3"><?php echo $get_folder[0]['title'];?>のタスク一覧</h2>
   <div class="todo-list">
     <div class="folder">
-      <?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/view/folders.php');?>
+      <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/folders.php');?>
     </div>
 
     <div id="todos" class="todos">
@@ -28,7 +28,7 @@ $get_folder = $folder->getFolder();
         </thead>
         <tbody>
 
-        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/view/tasks.php');?>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/tasks.php');?>
 
         </tbody>
       </table>
@@ -36,4 +36,4 @@ $get_folder = $folder->getFolder();
   </div><!--todo-list-->
 </div><!--container-->
 </main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/include/component/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>

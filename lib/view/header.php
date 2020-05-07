@@ -1,10 +1,10 @@
 <?php
 
 //セッションスタート
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/config.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Todo.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Folder.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../config/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../config/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Todo.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
 
 ?>
 <!DOCTYPE html>
@@ -25,9 +25,19 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/include/class/Folder.php');
   <a href="index.php" class="header__logo">TodoApp</a>
   <nav class="header__nav">
     <ul class="header__menu">
+    <?php if($_SESSION['me'] && !empty($_SESSION['me'])) {
+      $app = new MyApp\Controller\Index();
+      $app->run();
+    ?>
     　<li class="header__item"><a href="add_todo.php">タスク追加</a></li>
     　<li class="header__item"><a href="add_folder.php">フォルダ追加</a></li>
-    　<li class="header__item"><a href="">ログアウト</a></li>
+    　<li class="header__item">
+        <form action="logout.php" method="post" id="logout">
+          <input type="submit" value="ログアウト" name="submit" class="logout-btn">
+          <input type="hidden" name="token" value="<?php echo h($_SESSION['token']);?>">
+        </form>
+      </li>
+    <?php } ?>
     </ul>
   </nav>
 </div>
