@@ -340,6 +340,7 @@ td.todo__list--time.over {
   text-decoration: underline;
   color: #0566D6;
   font-size: 13px;
+  display: none;
 }
 .folder .folder-item .folder-link{
   margin-bottom: 5px;
@@ -364,6 +365,10 @@ td.todo__list--time.over {
 .folder .folder-item .folder-link.full-done:hover,
 .folder .folder-item .folder-link.full-done.current{
   background-color: #eb3f60;
+}
+
+.folder .folder-item:hover > .folder-update{
+  display: inline-block;
 }
 
 .folder .folder-item .folder-link:hover{
