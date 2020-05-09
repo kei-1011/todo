@@ -110,6 +110,62 @@ body {
   display: flex;
 }
 
+summary {
+  display: inline-block;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display:none;
+}
+
+.header__item .task-menu > ul {
+  position: absolute;
+  display: block;
+  width: 150px;
+  top: 60px;
+  background-color: #fff;
+  padding: 10px 0;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+  z-index: 100;
+}
+
+.header__item .task-menu > ul li a:hover{
+  background-color: #2479F8;
+  color:#fff;
+}
+.header__item .task-menu > ul li a{
+  display: block;
+  color:#333;
+  text-decoration: none;
+  padding: 5px;
+  line-height: 1.5;
+}
+
+.header__item .task-menu > .task-menu-toggle:before {
+  content: "+";
+  display: block;
+  width: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+}
+.header__item .task-menu[open] > .task-menu-toggle:before {
+  content: "-";
+}
+.header__item .task-menu[open] > .task-menu-toggle:after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  background: transparent;
+}
+
 .header__item a {
   display: block;
   color: #eee;

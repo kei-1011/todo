@@ -29,8 +29,15 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
       $app = new MyApp\Controller\Index();
       $app->run();
     ?>
-    　<li class="header__item"><a href="add_todo.php">タスク追加</a></li>
-    　<li class="header__item"><a href="add_folder.php">フォルダ追加</a></li>
+    　<li class="header__item">
+        <details class="task-menu">
+          <summary class="task-menu-toggle"></summary>
+          <ul>
+            <li><a href="add_todo.php">タスク追加</a></li>
+            <li><a href="add_folder.php">フォルダ追加</a></li>
+          </ul>
+        </details>
+      </li>
     　<li class="header__item">
         <form action="logout.php" method="post" id="logout">
           <input type="submit" value="ログアウト" name="submit" class="logout-btn">
