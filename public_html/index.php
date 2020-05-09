@@ -12,11 +12,15 @@ $folder = new Folder();
 $tasks = $todo->getAll();
 $folders = $folder->getAll();
 
-?>
+if(isset($_GET['folder_id'])) {
+  $tasks = $todo->getSortFolder();
+  $get_folder = $folder->getFolder();
+}
 
+?>
 <main class="top">
 <div id="container" class="container">
-  <h2 class="mb-3">タスク一覧</h2>
+  <h2 class="mb-3"><?php if(isset($_GET['folder_id'])){ echo $get_folder[0]['title']. 'の';} ?>タスク一覧</h2>
   <div class="todo-list">
     <div class="folder">
       <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/folders.php');?>
