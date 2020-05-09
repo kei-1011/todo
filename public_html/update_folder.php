@@ -18,11 +18,11 @@ $folder->post();
     <div class="btn-wrap">
     <a href="index.php" class="back">戻る</a>
     <div class="right">
-      <button type="submit" class="button delete_todo" name="mode" value="delete">削除</button>
+      <button type="submit" class="button delete_todo"  id="delete_btn" name="mode" value="delete">削除</button>
       <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
     </div>
     </div>
   </form>
 </div><!--container-->
 </main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
