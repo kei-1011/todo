@@ -83,7 +83,7 @@ body {
 -----------------------------------------------*/
 
 .header {
-  line-height: 60px;
+  line-height: 50px;
   background-color: #333;
   width: 100%;
 }
@@ -116,6 +116,9 @@ summary {
 }
 summary::-webkit-details-marker {
   display:none;
+}
+.header__item {
+  color:#eee;
 }
 
 .header__item .task-menu > ul {
@@ -367,6 +370,7 @@ td.todo__list--time.over {
   background-color: #eb3f60;
 }
 
+.folder .folder-item .folder-link:focus + .folder-update,
 .folder .folder-item:hover > .folder-update{
   display: inline-block;
 }

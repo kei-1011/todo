@@ -28,7 +28,9 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
     <?php if($_SESSION['me'] && !empty($_SESSION['me'])) {
       $app = new MyApp\Controller\Index();
       $app->run();
+
     ?>
+    　<li class="header__item">ユーザー名：<?php echo $app->me()->user_name;?></li>
     　<li class="header__item">
         <details class="task-menu">
           <summary class="task-menu-toggle"></summary>
