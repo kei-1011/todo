@@ -68,6 +68,8 @@ class Todo {
         return $this->_create();
       case 'delete':
         return $this->_delete();
+      case 'done':
+        return $this->_done();
     }
   }
 
@@ -131,5 +133,25 @@ class Todo {
 
     header('Location:index.php');
     exit();
+  }
+
+  // ! TODO ajaxでDB更新
+  public function _done() {
+    $id = $_POST['id'];
+    $status = '2';
+    //アップデート
+    $sql = 'UPDATE task SET status=? WHERE id=?';
+    $data[] = $status;
+    $data[] = $id;
+
+    $stmt = $this->_db->prepare($sql);
+    $stmt->execute($data);
+
+    //ajaxに値を返すためにSELECT
+    $sql = ("SELECT * FROM task WHERE id = '$id'");
+    $stmt = $this->_db->query($sql);
+    $res = $stmt->fetchColumn();
+
+    return $res;
   }
 }

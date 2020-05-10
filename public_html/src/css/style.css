@@ -113,6 +113,7 @@ body {
 summary {
   display: inline-block;
   list-style: none;
+  cursor: pointer;
 }
 summary::-webkit-details-marker {
   display:none;
@@ -323,6 +324,19 @@ td.todo__list--time.over {
 }
 .update_todo:hover {
   opacity:0.8;
+}
+
+.js_update_todo {
+  display: inline-block;
+  border-color:#eee;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.js_update_todo:hover,
+.js_update_todo:active {
+  background-color: #333;
+  color: #fff;
 }
 
 
