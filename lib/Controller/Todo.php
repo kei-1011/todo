@@ -1,157 +1,131 @@
 <?php
-class Todo {
 
+namespace MyApp\Controller;
 
-  private $_db;
+class Todo extends \MyApp\Controller {
 
-  public function __construct()
-  {
+  public function run() {
 
-    try {
-      $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);         //config.phpで定義したDB情報
-      $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    } catch (\PDOException $e) {
-      echo $e->getMessage();
-      exit;
-    }
+      if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $this->post();
+      }
   }
 
+  public function post() {
 
-  public function getAll() {
-    $sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
+    //validate
+    // try {
+    //   $this->_validate(); // プライベートメソッド
 
+    // } catch(\MyApp\Exception\InvalidUserName $e) {
 
+    // } catch(\MyApp\Exception\InvalidEmail $e) {
 
-  public function getDoneTask() {
-    $sql = "SELECT * FROM task WHERE status = 2 ORDER BY created ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
+    //   $this->setErrors('email',$e->getMessage());
 
 
-  public function getTaskSortId() {
-    $id = $_GET['id'];
-    $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
+    // } catch(\MyApp\Exception\InvalidPassword $e)  {
+    //   $this->setErrors('password',$e->getMessage());
+    // }
 
-  public function getSortFolder() {
-    if(isset($_GET['folder_id'])) {
-      $folder_id = $_GET['folder_id'];
+    // エラーがあった場合は処理を止める
+    if($this->hasError()) {
+
+      return;
+
     } else {
-      $folder_id = '';
-    }
-    $sql = "SELECT * FROM task WHERE status <> 2 AND folder_id = '$folder_id' ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
 
-
-  public function post(){
-
-    switch ($_POST['mode']) {
-      case 'update':
-        return $this->_update();
-      case 'create':
-        return $this->_create();
-      case 'delete':
-        return $this->_delete();
-      case 'done':
-        return $this->_done();
+      switch ($_POST['mode']) {
+        case 'update':
+          return $this->_update();
+        case 'create':
+          return $this->_create();
+        case 'delete':
+          return $this->_delete();
+        case 'done':
+          return $this->_done();
+      }
     }
   }
-
-
+  // タスクの追加
   public function _create() {
-    $folder_id = h($_POST['folder_id']);
-    $title = h($_POST['title']);
-    $due_date = h($_POST['due_date']);
-
-    $sql = 'INSERT INTO task(folder_id,title,due_date) VALUES (?,?,?)';
-    $stmt = $this->_db->prepare($sql);
-    $data[] = $folder_id;
-    $data[] = $title;
-    $data[] = $due_date;
-    $stmt->execute($data);
-
-    header('Location:index.php');
+    try{
+    $todoModel = new \MyApp\Model\Todo();
+    $todoModel->create([
+      'folder_id' => h($_POST['folder_id']),
+      'title' => h($_POST['title']),
+      'due_date' => h($_POST['due_date'])
+    ]);
+    } catch(\MyApp\Exception\EmptyFolder $e) {
+      $this->setErrors('folder',$e->getMessage());
+      return;
+    }
+    header('Location: '.SITE_URL);
     exit();
   }
 
+  // タスクの削除
   public function _delete() {
-    $id = $_GET['id'];
-
-    $sql = 'DELETE FROM task WHERE id=?';
-    $data[] = $id;
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
-
-    header('Location:index.php');
+    $todoModel = new \MyApp\Model\Todo();
+    $todoModel->delete([
+      'id' => h($_GET['id']),
+    ]);
+    header('Location: '.SITE_URL);
     exit();
   }
 
+  // タスクの更新
   public function _update() {
-    $id = $_GET['id'];
+    $todoModel = new \MyApp\Model\Todo();
     $status = h($_POST['status']);
-    $title = h($_POST['title']);
-    $due_date = h($_POST['due_date']);
-    $folder_id = h($_POST['folder_id']);
 
     if($status === '1') {
-      $date = new DateTime();
-      $now_date = $date->format('Y-m-d H:i:s');
-      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=?,proceed_date=? WHERE id=?';
-
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $now_date;
-      $data[] = $id;
-    } else {
-      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=? WHERE id=?';
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $id;
+      $todoModel->delete([
+        'id' => h($_GET['id']),
+        'status' => h($_POST['status']),
+        'title' => h($_POST['title']),
+        'due_date' => h($_POST['due_date']),
+        'folder_id' => h($_POST['folder_id']),
+      ]);
     }
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
-
-    header('Location:index.php');
-    exit();
   }
 
-  // ! TODO ajaxでDB更新
+
+  // タスクの更新
   public function _done() {
-    $id = $_POST['id'];
-    $status = '2';
-    //アップデート
-    $sql = 'UPDATE task SET status=? WHERE id=?';
-    $data[] = $status;
-    $data[] = $id;
+    $todoModel = new \MyApp\Model\Todo();
+    $todoModel->done([
+      'id' => h($_POST['id']),
+      'status' => '2',
+    ]);
+  }
 
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
 
-    //ajaxに値を返すためにSELECT
-    $sql = ("SELECT * FROM task WHERE id = '$id'");
-    $stmt = $this->_db->query($sql);
-    $res = $stmt->fetchColumn();
+  // バリデーション処理
+  private function _validate() {
 
-    return $res;
+    // CSRF対策
+    if(!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+      echo "Invalid Token!";
+      exit();
+    }
+
+    // Email
+    if(empty($_POST['user_name'])) {
+      throw new \MyApp\Exception\InvalidUserName();
+    }
+
+    // Email
+    if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+      // fildter_varのオプションFILTER_VALIDATE_EMAILで検証、
+      // うまくいかない場合には例外クラスを返す
+      throw new \MyApp\Exception\InvalidEmail();
+    }
+
+    // Password
+    if(!preg_match('/\A[a-zA-Z0-9]+\z/',$_POST['password'])) {
+      // うまくいかない場合には例外クラスを返す
+      throw new \MyApp\Exception\InvalidPassword();
+    }
   }
 }

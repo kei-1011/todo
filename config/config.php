@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 1); //エラー表示
+// ini_set('display_errors', 1); //エラー表示
 
 date_default_timezone_set('Asia/Tokyo');
 
