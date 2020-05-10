@@ -1,6 +1,6 @@
 <?php
 $url = $_SERVER['REQUEST_URI'];
-$folder_id = $_GET['folder_id'];
+// $folder_id = $_GET['folder_id'];
 
 ?>
 <ul class="folder-list">

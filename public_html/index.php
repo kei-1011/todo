@@ -45,4 +45,6 @@ if(isset($_GET['folder_id'])) {
   </div><!--todo-list-->
 </div><!--container-->
 </main>
+<input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
