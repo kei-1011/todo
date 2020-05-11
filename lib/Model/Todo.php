@@ -7,7 +7,7 @@ class Todo extends \MyApp\Model {
   // 「完了」以外の全てのタスクを取得
   public function getAll() {
     $sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll();
     return $res;
@@ -16,7 +16,7 @@ class Todo extends \MyApp\Model {
   // 「完了」タスクを取得
   public function getDoneTask() {
     $sql = "SELECT * FROM task WHERE status = 2 ORDER BY created ASC";
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll();
     return $res;
@@ -25,9 +25,9 @@ class Todo extends \MyApp\Model {
 
   // idと一致するタスクを取得
   public function getTaskSortId() {
-    $id = $_GET['id'];
+    $id = h($_GET['id']);
     $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll();
     return $res;
@@ -36,89 +36,68 @@ class Todo extends \MyApp\Model {
   // folder_idと一致するフォルダ情報を取得
   public function getSortFolder() {
     if(isset($_GET['folder_id'])) {
-      $folder_id = $_GET['folder_id'];
+      $folder_id = h($_GET['folder_id']);
     } else {
       $folder_id = '';
     }
     $sql = "SELECT * FROM task WHERE status <> 2 AND folder_id = '$folder_id' ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll();
     return $res;
   }
 
-  // ! タスクの追加
+  //  タスクの追加
   public function create($values) {
-    $folder_id = $values['folder_id'];
-    $title = $values['title'];
-    $due_date = $values['due_date'];
-
     $sql = 'INSERT INTO task(folder_id,title,due_date) VALUES (?,?,?)';
-    $stmt = $this->_db->prepare($sql);
-    $data[] = $folder_id;
-    $data[] = $title;
-    $data[] = $due_date;
+    $stmt = $this->db->prepare($sql);
+    $data[] = $values['folder_id'];
+    $data[] = $values['title'];
+    $data[] = $values['due_date'];
     $stmt->execute($data);
 
-    header('Location:index.php');
-    exit();
   }
 
-  // TODO タスクの削除
+  // タスクの削除
   public function delete($values) {
     $id = $values['id'];
     $sql = 'DELETE FROM task WHERE id=?';
     $data[] = $id;
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute($data);
   }
 
-  // TODO タスクの更新
-  public function update() {
-    $id = $_GET['id'];
-    $status = h($_POST['status']);
-    $title = h($_POST['title']);
-    $due_date = h($_POST['due_date']);
-    $folder_id = h($_POST['folder_id']);
+  //  タスクの更新
+  public function update($values) {
 
-    if($status === '1') {
-      $date = new DateTime();
-      $now_date = $date->format('Y-m-d H:i:s');
-      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=?,proceed_date=? WHERE id=?';
+    $data[] = $values['folder_id'];
+    $data[] = $values['title'];
+    $data[] = $values['status'];
+    $data[] = $values['due_date'];
+    $data[] = $values['id'];
 
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $now_date;
-      $data[] = $id;
+    if($values['status'] === '1') {
+      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=?,proceed_date=NOW() WHERE id=?';
     } else {
       $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=? WHERE id=?';
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $id;
     }
-    $stmt = $this->_db->prepare($sql);
+    $stmt = $this->db->prepare($sql);
     $stmt->execute($data);
   }
 
-  // TODO ajaxでDB更新
-  public function done() {
-    $id = $_POST['id'];
-    $status = '2';
-    //アップデート
-    $sql = 'UPDATE task SET status=? WHERE id=?';
-    $data[] = $status;
-    $data[] = $id;
+  // ajaxでDB更新
+  public function done($values) {
+    $id = $values['id'];
 
-    $stmt = $this->_db->prepare($sql);
+    $sql = 'UPDATE task SET status=? WHERE id=?';
+    $data[] = $values['status'];
+    $data[] = $id;
+    $stmt = $this->db->prepare($sql);
     $stmt->execute($data);
 
     //ajaxに値を返すためにSELECT
     $sql = ("SELECT * FROM task WHERE id = '$id'");
-    $stmt = $this->_db->query($sql);
+    $stmt = $this->db->query($sql);
     $res = $stmt->fetchColumn();
 
     return $res;

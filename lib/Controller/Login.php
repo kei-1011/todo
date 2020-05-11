@@ -61,7 +61,7 @@ class Login extends \MyApp\Controller {
       }
       // ログイン処理
 
-      session_regenerate_id(true);    // セッションハイジャック対策　→　// TODO調べる
+      session_regenerate_id(true);    // セッションハイジャック対策　→　// ? TODO調べる
 
       $_SESSION['me'] = $user;
 

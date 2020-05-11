@@ -13,55 +13,53 @@ class Todo extends \MyApp\Controller {
 
   public function post() {
 
-    //validate
-    // try {
-    //   $this->_validate(); // プライベートメソッド
+    if(isset($_POST['mode'])) {
 
-    // } catch(\MyApp\Exception\InvalidUserName $e) {
+      if($_POST['mode'] === 'update') {
+        return $this->_update();
+      } elseif($_POST['mode'] === 'create') {
+        return $this->_create();
+      } elseif($_POST['mode'] === 'delete') {
+        return $this->_delete();
+      } elseif($_POST['mode'] === 'done') {
+        return $this->_done();
+      } else {
+        return;
+      }
+    }
+  }
 
-    // } catch(\MyApp\Exception\InvalidEmail $e) {
+  // タスクの追加
+  public function _create() {
+    try{
+      $this->_createValidate(); // プライベートメソッド
 
-    //   $this->setErrors('email',$e->getMessage());
+    } catch(\MyApp\Exception\EmptyTodoTitle $e) {
+      $this->setErrors('title',$e->getMessage());
 
+    } catch(\MyApp\Exception\EmptyTodoDueDate $e) {
 
-    // } catch(\MyApp\Exception\InvalidPassword $e)  {
-    //   $this->setErrors('password',$e->getMessage());
-    // }
+      $this->setErrors('due_date',$e->getMessage());
 
-    // エラーがあった場合は処理を止める
+    } catch(\MyApp\Exception\EmptyTodoFolder $e)  {
+      $this->setErrors('folder',$e->getMessage());
+    }
+
     if($this->hasError()) {
 
       return;
 
     } else {
 
-      switch ($_POST['mode']) {
-        case 'update':
-          return $this->_update();
-        case 'create':
-          return $this->_create();
-        case 'delete':
-          return $this->_delete();
-        case 'done':
-          return $this->_done();
-      }
+      $todoModel = new \MyApp\Model\Todo();
+      $todoModel->create([
+        'folder_id' => h($_POST['folder_id']),
+        'title' => h($_POST['title']),
+        'due_date' => h($_POST['due_date'])
+      ]);
+      header('Location: '.SITE_URL);
+      exit();
     }
-  }
-  // タスクの追加
-  public function _create() {
-    try{
-    $todoModel = new \MyApp\Model\Todo();
-    $todoModel->create([
-      'folder_id' => h($_POST['folder_id']),
-      'title' => h($_POST['title']),
-      'due_date' => h($_POST['due_date'])
-    ]);
-    } catch(\MyApp\Exception\EmptyFolder $e) {
-      $this->setErrors('folder',$e->getMessage());
-      return;
-    }
-    header('Location: '.SITE_URL);
-    exit();
   }
 
   // タスクの削除
@@ -76,20 +74,44 @@ class Todo extends \MyApp\Controller {
 
   // タスクの更新
   public function _update() {
-    $todoModel = new \MyApp\Model\Todo();
-    $status = h($_POST['status']);
+    try{
+      $this->_createValidate(); // プライベートメソッド
 
-    if($status === '1') {
-      $todoModel->delete([
-        'id' => h($_GET['id']),
-        'status' => h($_POST['status']),
-        'title' => h($_POST['title']),
-        'due_date' => h($_POST['due_date']),
-        'folder_id' => h($_POST['folder_id']),
-      ]);
+    } catch(\MyApp\Exception\EmptyTodoTitle $e) {
+      $this->setErrors('title',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoDueDate $e) {
+
+      $this->setErrors('due_date',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoFolder $e)  {
+      $this->setErrors('folder',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoStatus $e)  {
+      $this->setErrors('status',$e->getMessage());
     }
-  }
 
+    if($this->hasError()) {
+
+      return;
+
+    } else {
+      $todoModel = new \MyApp\Model\Todo();
+      $status = h($_POST['status']);
+
+      if($status === '1') {
+        $todoModel->update([
+          'id' => h($_GET['id']),
+          'status' => h($_POST['status']),
+          'title' => h($_POST['title']),
+          'due_date' => h($_POST['due_date']),
+          'folder_id' => h($_POST['folder_id']),
+        ]);
+      }
+    }
+    header('Location: '.SITE_URL);
+    exit();
+  }
 
   // タスクの更新
   public function _done() {
@@ -100,32 +122,27 @@ class Todo extends \MyApp\Controller {
     ]);
   }
 
-
-  // バリデーション処理
-  private function _validate() {
-
+  // バリデーション処理 create
+  private function _createValidate() {
     // CSRF対策
     if(!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
       echo "Invalid Token!";
       exit();
     }
 
-    // Email
-    if(empty($_POST['user_name'])) {
-      throw new \MyApp\Exception\InvalidUserName();
+    // Title
+    if(empty($_POST['title'])) {
+      throw new \MyApp\Exception\EmptyTodoTitle();
     }
 
-    // Email
-    if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
-      // fildter_varのオプションFILTER_VALIDATE_EMAILで検証、
-      // うまくいかない場合には例外クラスを返す
-      throw new \MyApp\Exception\InvalidEmail();
+    // due_date
+    if(empty($_POST['due_date'])) {
+      throw new \MyApp\Exception\EmptyTodoDueDate();
     }
 
-    // Password
-    if(!preg_match('/\A[a-zA-Z0-9]+\z/',$_POST['password'])) {
-      // うまくいかない場合には例外クラスを返す
-      throw new \MyApp\Exception\InvalidPassword();
+    // folder_id
+    if(empty($_POST['folder_id'])) {
+      throw new \MyApp\Exception\EmptyTodoFolder();
     }
   }
 }
