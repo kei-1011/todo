@@ -97,17 +97,13 @@ class Todo extends \MyApp\Controller {
 
     } else {
       $todoModel = new \MyApp\Model\Todo();
-      $status = h($_POST['status']);
-
-      if($status === '1') {
-        $todoModel->update([
-          'id' => h($_GET['id']),
-          'status' => h($_POST['status']),
-          'title' => h($_POST['title']),
-          'due_date' => h($_POST['due_date']),
-          'folder_id' => h($_POST['folder_id']),
-        ]);
-      }
+      $todoModel->update([
+        'id' => h($_GET['id']),
+        'status' => h($_POST['status']),
+        'title' => h($_POST['title']),
+        'due_date' => h($_POST['due_date']),
+        'folder_id' => h($_POST['folder_id']),
+      ]);
     }
     header('Location: '.SITE_URL);
     exit();

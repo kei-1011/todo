@@ -2,8 +2,8 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 $todo = new MyApp\Controller\Todo();
-$todo->post();
-$folder = new Folder();
+$todo->run();
+$folder = new MyApp\Model\Folder();
 $folders = $folder->getAll();
 ?>
 

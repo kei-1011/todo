@@ -8,8 +8,8 @@ $app->run();
 
 $todo = new MyApp\Model\Todo();
 $tasks = $todo->getAll();
-// $folder = new Folder();
-// $folders = $folder->getAll();
+$folder = new MyApp\Model\Folder();
+$folders = $folder->getAll();
 
 if(isset($_GET['folder_id'])) {
   $tasks = $todo->getSortFolder();

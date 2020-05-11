@@ -1,9 +1,11 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
-$folder = new Folder();
-$folders = $folder->getFolder();
-$folder->post();
+$folder = new MyApp\Controller\Folder();
+$get_folder = new MyApp\Model\Folder();
+
+$folders = $get_folder->getFolder();
+$folder->run();
 
 ?>
 
@@ -22,6 +24,7 @@ $folder->post();
       <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
     </div>
     </div>
+    <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
   </form>
 </div><!--container-->
 </main>

@@ -2,11 +2,12 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
 $todo = new MyApp\Controller\Todo();
-$folder = new Folder();
 $get_todo = new MyApp\Model\Todo();
-$folders = $folder->getAll();
+$get_folder = new MyApp\Model\Folder();
+
+$folders = $get_folder->getAll();
 $res = $get_todo->getTaskSortId();
-$todo->post();
+$todo->run();
 
 ?>
 
