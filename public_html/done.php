@@ -3,8 +3,8 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
 // 登録したタスクをリスト表示させる
 
-$todo = new Todo();
-$folder = new Folder();
+$todo = new MyApp\Model\Todo();
+$folder = new MyApp\Model\Folder();
 $tasks = $todo->getDoneTask();
 $folders = $folder->getAll();
 ?>

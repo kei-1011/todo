@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../config/config.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Todo.php');
 
 // ! TODO ajax 処理
-$todoApp = new Todo();
+$todoApp = new MyApp\Controller\Todo();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {

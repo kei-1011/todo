@@ -1,15 +1,14 @@
 
 <?php
 
-
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 $app = new MyApp\Controller\Index();
 $app->run();
 // 登録したタスクをリスト表示させる
 
-$todo = new Todo();
-$folder = new Folder();
+$todo = new MyApp\Model\Todo();
 $tasks = $todo->getAll();
+$folder = new MyApp\Model\Folder();
 $folders = $folder->getAll();
 
 if(isset($_GET['folder_id'])) {

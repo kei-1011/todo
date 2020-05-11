@@ -11,8 +11,12 @@
 
         // タスク期限の管理
         $date = new DateTime();
+        if(isset($task['proceed_date'])) {
+          $proceed = strtotime($task['proceed_date']);   // 着手日
+        } else {
+          $proceed = strtotime($task['created']);   // 着手日
+        }
         $created = strtotime($task['created']);  // 最新の更新日
-        $proceed = strtotime($task['proceed_date']);   // 着手日
 
         // 作業時間を計算
         $work_diff = ceil(($created - $proceed)/60);

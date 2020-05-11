@@ -4,10 +4,6 @@ $(function() {
     let rowId = $('#todo_row_' + id);
     let token = $("#token").val();
 
-    console.log(id);
-    console.log(rowId);
-    console.log(token);
-
     $.ajax({
       type: "POST",
       url: "./_ajax.php",
@@ -18,9 +14,7 @@ $(function() {
       },
       dataType: "json"
     }).done(function (res) {
-      setTimeout(function () {
-        rowId.fadeOut();
-      }, 500);
+        rowId.hide("slow");
     }).fail(function (XMLHttpRequest, textStatus, error) {
       alert(error);
     });

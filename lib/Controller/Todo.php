@@ -1,157 +1,144 @@
 <?php
-class Todo {
 
+namespace MyApp\Controller;
 
-  private $_db;
+class Todo extends \MyApp\Controller {
 
-  public function __construct()
-  {
+  public function run() {
 
-    try {
-      $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);         //config.phpで定義したDB情報
-      $this->_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    } catch (\PDOException $e) {
-      echo $e->getMessage();
-      exit;
-    }
+      if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $this->post();
+      }
   }
 
+  public function post() {
 
-  public function getAll() {
-    $sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
+    if(isset($_POST['mode'])) {
 
-
-
-  public function getDoneTask() {
-    $sql = "SELECT * FROM task WHERE status = 2 ORDER BY created ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
-
-
-  public function getTaskSortId() {
-    $id = $_GET['id'];
-    $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id'";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
-
-  public function getSortFolder() {
-    if(isset($_GET['folder_id'])) {
-      $folder_id = $_GET['folder_id'];
-    } else {
-      $folder_id = '';
-    }
-    $sql = "SELECT * FROM task WHERE status <> 2 AND folder_id = '$folder_id' ORDER BY due_date ASC";
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute();
-    $res = $stmt->fetchAll();
-    return $res;
-  }
-
-
-  public function post(){
-
-    switch ($_POST['mode']) {
-      case 'update':
+      if($_POST['mode'] === 'update') {
         return $this->_update();
-      case 'create':
+      } elseif($_POST['mode'] === 'create') {
         return $this->_create();
-      case 'delete':
+      } elseif($_POST['mode'] === 'delete') {
         return $this->_delete();
-      case 'done':
+      } elseif($_POST['mode'] === 'done') {
         return $this->_done();
+      } else {
+        return;
+      }
     }
   }
 
-
+  // タスクの追加
   public function _create() {
-    $folder_id = h($_POST['folder_id']);
-    $title = h($_POST['title']);
-    $due_date = h($_POST['due_date']);
+    try{
+      $this->_createValidate(); // プライベートメソッド
 
-    $sql = 'INSERT INTO task(folder_id,title,due_date) VALUES (?,?,?)';
-    $stmt = $this->_db->prepare($sql);
-    $data[] = $folder_id;
-    $data[] = $title;
-    $data[] = $due_date;
-    $stmt->execute($data);
+    } catch(\MyApp\Exception\EmptyTodoTitle $e) {
+      $this->setErrors('title',$e->getMessage());
 
-    header('Location:index.php');
-    exit();
-  }
+    } catch(\MyApp\Exception\EmptyTodoDueDate $e) {
 
-  public function _delete() {
-    $id = $_GET['id'];
+      $this->setErrors('due_date',$e->getMessage());
 
-    $sql = 'DELETE FROM task WHERE id=?';
-    $data[] = $id;
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
-
-    header('Location:index.php');
-    exit();
-  }
-
-  public function _update() {
-    $id = $_GET['id'];
-    $status = h($_POST['status']);
-    $title = h($_POST['title']);
-    $due_date = h($_POST['due_date']);
-    $folder_id = h($_POST['folder_id']);
-
-    if($status === '1') {
-      $date = new DateTime();
-      $now_date = $date->format('Y-m-d H:i:s');
-      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=?,proceed_date=? WHERE id=?';
-
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $now_date;
-      $data[] = $id;
-    } else {
-      $sql = 'UPDATE task SET folder_id=?,title=?,status=?,due_date=? WHERE id=?';
-      $data[] = $folder_id;
-      $data[] = $title;
-      $data[] = $status;
-      $data[] = $due_date;
-      $data[] = $id;
+    } catch(\MyApp\Exception\EmptyTodoFolder $e)  {
+      $this->setErrors('folder',$e->getMessage());
     }
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
 
-    header('Location:index.php');
+    if($this->hasError()) {
+
+      return;
+
+    } else {
+
+      $todoModel = new \MyApp\Model\Todo();
+      $todoModel->create([
+        'folder_id' => h($_POST['folder_id']),
+        'title' => h($_POST['title']),
+        'due_date' => h($_POST['due_date'])
+      ]);
+      header('Location: '.SITE_URL);
+      exit();
+    }
+  }
+
+  // タスクの削除
+  public function _delete() {
+    $todoModel = new \MyApp\Model\Todo();
+    $todoModel->delete([
+      'id' => h($_GET['id']),
+    ]);
+    header('Location: '.SITE_URL);
     exit();
   }
 
-  // ! TODO ajaxでDB更新
+  // タスクの更新
+  public function _update() {
+    try{
+      $this->_createValidate(); // プライベートメソッド
+
+    } catch(\MyApp\Exception\EmptyTodoTitle $e) {
+      $this->setErrors('title',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoDueDate $e) {
+
+      $this->setErrors('due_date',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoFolder $e)  {
+      $this->setErrors('folder',$e->getMessage());
+
+    } catch(\MyApp\Exception\EmptyTodoStatus $e)  {
+      $this->setErrors('status',$e->getMessage());
+    }
+
+    if($this->hasError()) {
+
+      return;
+
+    } else {
+      $todoModel = new \MyApp\Model\Todo();
+      $todoModel->update([
+        'id' => h($_GET['id']),
+        'status' => h($_POST['status']),
+        'title' => h($_POST['title']),
+        'due_date' => h($_POST['due_date']),
+        'folder_id' => h($_POST['folder_id']),
+      ]);
+    }
+    header('Location: '.SITE_URL);
+    exit();
+  }
+
+  // タスクの更新
   public function _done() {
-    $id = $_POST['id'];
-    $status = '2';
-    //アップデート
-    $sql = 'UPDATE task SET status=? WHERE id=?';
-    $data[] = $status;
-    $data[] = $id;
+    $todoModel = new \MyApp\Model\Todo();
+    $todoModel->done([
+      'id' => h($_POST['id']),
+      'status' => '2',
+    ]);
+  }
 
-    $stmt = $this->_db->prepare($sql);
-    $stmt->execute($data);
+  // バリデーション処理 create
+  private function _createValidate() {
+    // CSRF対策
+    if(!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {
+      echo "Invalid Token!";
+      exit();
+    }
 
-    //ajaxに値を返すためにSELECT
-    $sql = ("SELECT * FROM task WHERE id = '$id'");
-    $stmt = $this->_db->query($sql);
-    $res = $stmt->fetchColumn();
+    // Title
+    if(empty($_POST['title'])) {
+      throw new \MyApp\Exception\EmptyTodoTitle();
+    }
 
-    return $res;
+    // due_date
+    if(empty($_POST['due_date'])) {
+      throw new \MyApp\Exception\EmptyTodoDueDate();
+    }
+
+    // folder_id
+    if(empty($_POST['folder_id'])) {
+      throw new \MyApp\Exception\EmptyTodoFolder();
+    }
   }
 }
