@@ -3,7 +3,6 @@ namespace MyApp\Model;
 
 class Todo extends \MyApp\Model {
 
-
   // 「完了」以外の全てのタスクを取得
   public function getAll() {
     $sql = "SELECT * FROM task WHERE status <> 2 ORDER BY due_date ASC";
