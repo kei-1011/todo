@@ -25,7 +25,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
   <a href="index.php" class="header__logo">TodoApp</a>
   <nav class="header__nav">
     <ul class="header__menu">
-    <?php if($_SESSION['me'] && !empty($_SESSION['me'])) {
+    <?php if(isset($_SESSION['me']) && !empty($_SESSION['me'])) {
       $app = new MyApp\Controller\Index();
       $app->run();
 
