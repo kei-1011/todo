@@ -53,33 +53,11 @@ body {
   justify-content: center;
 }
 
-.title {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 32px;
-}
-
 .mb-3 {
   margin-bottom: 20px;
 }
 
-.btn-add {
-  display: block;
-  background-color: #eee;
-  text-align: center;
-  width: 100%;
-  line-height: 40px;
-  border:1px solid #eee;
-  transition:background 0.4s;
-  margin-bottom: 30px;
-
-}
-.btn-add:hover {
-  background-color: #333;
-  color: #fff;
-}
-
-/*  header footer
+/*  header footer component
 -----------------------------------------------*/
 
 .header {
@@ -118,6 +96,7 @@ summary {
 summary::-webkit-details-marker {
   display:none;
 }
+
 .header__item {
   color:#eee;
 }
@@ -169,18 +148,6 @@ summary::-webkit-details-marker {
   z-index: 50;
   background: transparent;
 }
-
-.header__item a {
-  display: block;
-  color: #eee;
-  text-decoration: underline;
-  text-decoration-color: #eee;
-  transition:all 0.4s;
-}
-.header__item a:hover {
-  opacity: 0.8;
-}
-
 footer {
   background-color: #333;
   line-height: 50px;
@@ -203,6 +170,7 @@ footer {
   color:#333;
 }
 
+/* タスク追加、フォルダー追加ボタン*/
 .button {
   display: inline-block;
   border-radius: 8px;
@@ -222,7 +190,6 @@ footer {
   color: #2cb696;
   background: #fff;
 }
-
 
 .logout-btn {
   display: inline-block;
@@ -294,19 +261,6 @@ td.todo__list--time.over {
   font-weight: bold;
 }
 
-.btn {
-  display: inline-block;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  padding: 0.3rem 1rem;
-  transition: 0.3s;
-  font-size: 12px;
-  width: 60px;
-}
-
 /* 削除ボタン */
 .delete_todo {
   background-color: #eb3f60;
@@ -327,10 +281,16 @@ td.todo__list--time.over {
 }
 
 .js_update_todo {
+  background-color: transparent;
+  padding: 0;
+  appearance: none;
   display: inline-block;
-  border-color:#eee;
-  padding: 3px;
+  border: none;
+  box-shadow: 1px 2px 4px #ccc;
+  border-radius:2px;
+  padding: 5px;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 .js_update_todo:hover,
@@ -359,6 +319,7 @@ td.todo__list--time.over {
   font-size: 13px;
   display: none;
 }
+
 .folder .folder-item .folder-link{
   margin-bottom: 5px;
   padding: 5px 10px;
@@ -368,6 +329,7 @@ td.todo__list--time.over {
   margin-right: 10px;
   box-sizing: border-box;
 }
+
 .folder .folder-item .folder-link.full,
 .folder .folder-item .folder-link.full-done{
   display: block;
@@ -442,10 +404,8 @@ td.todo__list--time.over {
 }
 
 .error {
-  color:red;
+  color:#eb3f60;
 }
-
-
 
 
 /* update
@@ -471,20 +431,6 @@ select {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 1px 2px 16px #ccc;
-}
-
-
-
-@media screen and (max-width: 767px) {
-  .container .todo-list {
-    flex-direction: column-reverse;
-  }
-  .container .todo-list .folder {
-    width: 100%;
-  }
-  .container .todo-list .todos {
-    width: 100%;
-  }
 }
 
 
@@ -549,4 +495,35 @@ select {
 .login_wrapper form .signup-link {
   color:#0566D6;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 2rem 1rem ;
+  }
+  .container .todo-list {
+    flex-direction: column-reverse;
+  }
+  .container .todo-list .folder {
+    width: 100%;
+  }
+  .container .todo-list .todos {
+    width: 100%;
+    margin-bottom:3rem;
+  }
+
+  .login_wrapper {
+    width: 100%;
+  }
+  .header .inner {
+    padding: 0 1rem;
+  }
+  .header__menu {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .header__menu .header__item:first-child {
+    display: none;
+  }
 }
