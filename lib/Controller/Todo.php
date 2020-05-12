@@ -53,6 +53,7 @@ class Todo extends \MyApp\Controller {
 
       $todoModel = new \MyApp\Model\Todo();
       $todoModel->create([
+        'user_id' => $this->me()->id,
         'folder_id' => h($_POST['folder_id']),
         'title' => h($_POST['title']),
         'due_date' => h($_POST['due_date'])
@@ -66,6 +67,7 @@ class Todo extends \MyApp\Controller {
   public function _delete() {
     $todoModel = new \MyApp\Model\Todo();
     $todoModel->delete([
+      'user_id' => $this->me()->id,
       'id' => h($_GET['id']),
     ]);
     header('Location: '.SITE_URL);
@@ -98,6 +100,7 @@ class Todo extends \MyApp\Controller {
     } else {
       $todoModel = new \MyApp\Model\Todo();
       $todoModel->update([
+        'user_id' => $this->me()->id,
         'id' => h($_GET['id']),
         'status' => h($_POST['status']),
         'title' => h($_POST['title']),
@@ -113,6 +116,7 @@ class Todo extends \MyApp\Controller {
   public function _done() {
     $todoModel = new \MyApp\Model\Todo();
     $todoModel->done([
+      'user_id' => $this->me()->id,
       'id' => h($_POST['id']),
       'status' => '2',
     ]);

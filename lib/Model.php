@@ -14,4 +14,9 @@ class Model {
       exit();
     }
   }
+
+  public function getUserId() {
+    $get_user = new \MyApp\Controller;
+    return $get_user->me()->id;
+  }
 }
