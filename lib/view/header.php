@@ -28,15 +28,14 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
     <?php if(isset($_SESSION['me']) && !empty($_SESSION['me'])) {
       $app = new MyApp\Controller\Index();
       $app->run();
-
     ?>
     　<li class="header__item">ユーザー名：<?php echo $app->me()->user_name;?></li>
     　<li class="header__item">
         <details class="task-menu">
           <summary class="task-menu-toggle"></summary>
           <ul>
-            <li><a href="add_todo.php">タスク追加</a></li>
-            <li><a href="add_folder.php">フォルダ追加</a></li>
+            <li><button id="js-add_todo">タスク追加</button></li>
+            <li><a href="add_folder.php" id="js-add_folder">フォルダ追加</a></li>
           </ul>
         </details>
       </li>
