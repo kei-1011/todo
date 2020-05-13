@@ -322,11 +322,10 @@ td.todo__list--time.over {
 
 .folder .folder-item .folder-link{
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 5px;
   display: inline-block;
   transition: background 0.4s;
-  width: 120px;
-  margin-right: 10px;
+  width: 130px;
   box-sizing: border-box;
 }
 

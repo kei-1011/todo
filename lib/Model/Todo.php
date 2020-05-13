@@ -108,4 +108,34 @@ class Todo extends \MyApp\Model {
 
     return $res;
   }
+
+  // folder_idと合致するタスク件数を返す
+  public function allCount() {
+    $user_id = $this->getUserId();
+    $sql = "SELECT COUNT(*) FROM task WHERE status <> 2 AND user_id = '$user_id'";
+    $stmt = $this->db-> prepare($sql);
+    $stmt->execute();
+
+    return $stmt -> fetchColumn();
+  }
+
+  // folder_idと合致するタスク件数を返す
+  public function doneCount() {
+    $user_id = $this->getUserId();
+    $sql = "SELECT COUNT(*) FROM task WHERE status = 2 AND user_id = '$user_id'";
+    $stmt = $this->db-> prepare($sql);
+    $stmt->execute();
+
+    return $stmt -> fetchColumn();
+  }
+
+  // folder_idと合致するタスク件数を返す
+  public function folderCount($value) {
+    $user_id = $this->getUserId();
+    $sql = "SELECT COUNT(*) FROM task WHERE status <> 2 AND folder_id = '$value' AND user_id = '$user_id'";
+    $stmt = $this->db-> prepare($sql);
+    $stmt->execute();
+
+    return $stmt -> fetchColumn();
+  }
 }
