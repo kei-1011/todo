@@ -25,8 +25,8 @@ class Todo extends \MyApp\Model {
 
   // idと一致するタスクを取得
   public function getTaskSortId() {
-    $user_id = $this->getUserId();
     $id = h($_GET['id']);
+    $user_id = $this->getUserId();
     $sql = "SELECT folder_id,title,status,due_date FROM task WHERE id = '$id' AND user_id = '$user_id'";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();

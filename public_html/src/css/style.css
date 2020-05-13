@@ -368,7 +368,7 @@ td.todo__list--time.over {
 .add_todo {
   text-align: center;
   margin: 0 auto;
-  width: 50%;
+  width: 750px;
 }
 .add_todo .container form{
   padding: 20px;
@@ -398,7 +398,7 @@ td.todo__list--time.over {
   justify-content: space-between;
 }
 
-.btn-wrap .back {
+.link {
   color:#0566D6;
   text-decoration: underline;
 }
@@ -511,7 +511,9 @@ select {
     width: 100%;
     margin-bottom:3rem;
   }
-
+  .add_todo {
+    width: 100%;
+  }
   .login_wrapper {
     width: 100%;
   }
