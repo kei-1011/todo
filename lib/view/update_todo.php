@@ -1,18 +1,3 @@
-<?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
-
-$todo = new MyApp\Controller\Todo();
-$get_todo = new MyApp\Model\Todo();
-$get_folder = new MyApp\Model\Folder();
-
-$folders = $get_folder->getAll();
-$res = $get_todo->getTaskSortId();
-$todo->run();
-
-?>
-
-<main class="add_todo">
-<div class="container">
 <h2 class="mb-3">タスクを編集する</h2>
   <form action="" method="post">
     <div class="row">
@@ -46,14 +31,11 @@ $todo->run();
     </div>
 
     <div class="btn-wrap">
-    <a href="index.php" class="back">戻る</a>
+    <a href="index.php" class="link">戻る</a>
     <div class="right">
-      <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
       <button type="submit" id="delete_btn" class="button delete_todo" name="mode" value="delete">削除</button>
+      <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
     </div>
     </div>
     <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
   </form>
-</div><!--container-->
-</main>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>

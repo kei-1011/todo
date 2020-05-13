@@ -54,6 +54,6 @@
             <?php echo $status; ?>
           <?php } ?>
           </td>
-          <td class="todo__list--update"><a href="update_todo.php?id=<?php echo $task['id'];?>" class="update_todo">編集</a></td>
+          <td class="todo__list--update"><a href="update.php?id=<?php echo $task['id'];?>" class="update_todo">編集</a></td>
         </tr>
         <?php } ?>
