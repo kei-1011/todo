@@ -13,7 +13,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
-  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'];?>/src/css/style.css">
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'];?>/src/css/style.css?<?php echo date("YmdHis"); ?>">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php $_SERVER['DOCUMENT_ROOT'];?>/src/lib/jquery.datetimepicker.css">
 
@@ -28,14 +28,15 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
     <?php if(isset($_SESSION['me']) && !empty($_SESSION['me'])) {
       $app = new MyApp\Controller\Index();
       $app->run();
+
     ?>
     　<li class="header__item">ユーザー名：<?php echo $app->me()->user_name;?></li>
     　<li class="header__item">
         <details class="task-menu">
           <summary class="task-menu-toggle"></summary>
           <ul>
-            <li><button id="js-add_todo">タスク追加</button></li>
-            <li><a href="add_folder.php" id="js-add_folder">フォルダ追加</a></li>
+            <li><a href="add_todo.php">タスク追加</a></li>
+            <li><a href="add_folder.php">フォルダ追加</a></li>
           </ul>
         </details>
       </li>
