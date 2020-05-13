@@ -22,7 +22,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
 <body>
 <header class="header">
 <div class="inner">
-  <a href="index.php" class="header__logo">TodoApp</a>
+  <a href="<?php echo SITE_URL;?>" class="header__logo">TodoApp</a>
   <nav class="header__nav">
     <ul class="header__menu">
     <?php if(isset($_SESSION['me']) && !empty($_SESSION['me'])) {
@@ -35,8 +35,8 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Folder.php');
         <details class="task-menu">
           <summary class="task-menu-toggle"></summary>
           <ul>
-            <li><a href="add_todo.php">タスク追加</a></li>
-            <li><a href="add_folder.php">フォルダ追加</a></li>
+            <li><a href="<?php echo SITE_URL;?>post.php?type=todo">タスク追加</a></li>
+            <li><a href="<?php echo SITE_URL;?>post.php?type=folder">フォルダ追加</a></li>
           </ul>
         </details>
       </li>
