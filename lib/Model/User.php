@@ -27,6 +27,14 @@ class User extends \MyApp\Model {
         ':email' => $values['email'],
         ':password' => password_hash($values['password'],PASSWORD_DEFAULT) // defaultのアルゴリズムでハッシュ化
       ]);
+
+      // user_idを取得、デフォルトのフォルダを作成
+      $create_user_id = $this->db->lastInsertId();
+      $folderModel = new \MyApp\Model\Folder();
+      $folderModel->create([
+        'user_id' => $create_user_id,
+        'title' => '未分類',
+      ]);
     }
 
     // dot install のこのコードは動かなかった。

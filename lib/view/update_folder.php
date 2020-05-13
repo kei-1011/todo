@@ -5,7 +5,7 @@
       <input type="text" name="title" id="title" class="input-text" value="<?php echo $folders[0]['title'];?>">
     </div>
     <div class="btn-wrap">
-    <a href="index.php" class="link">戻る</a>
+    <a href="<?php echo SITE_URL;?>" class="link">戻る</a>
     <div class="right">
       <button type="submit" class="button delete_todo"  id="delete_btn" name="mode" value="delete">削除</button>
       <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
