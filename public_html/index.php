@@ -7,9 +7,14 @@ $app->run();
 // 登録したタスクをリスト表示させる
 
 $todo = new MyApp\Model\Todo();
-$tasks = $todo->getAll();
 $folder = new MyApp\Model\Folder();
 $folders = $folder->getAll();
+
+if(isset($_GET['status'])) {
+  $tasks = $todo->getDoneTask();
+} else {
+  $tasks = $todo->getAll();
+}
 
 if(isset($_GET['folder_id'])) {
   $tasks = $todo->getSortFolder();
