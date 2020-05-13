@@ -2,9 +2,15 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
 
+$todo = new MyApp\Model\Todo();
+$folder = new MyApp\Model\Folder();
+$folders = $folder->getAll();
+
 ?>
 
 <main class="add_todo">
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/folders.php');?>
+
   <div class="container">
   <?php
   if($_GET['type'] === 'folder') {
