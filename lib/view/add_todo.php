@@ -13,7 +13,6 @@
     <div class="row">
       <label for="folder_id">フォルダ</label>
       <select name="folder_id" id="folder_id" class="folder_id">
-        <option value=""></option>
         <?php foreach($folders as $folder){?>
         <option value="<?php echo $folder['id'];?>" <?php if(isset($_POST['folder_id'])){ if($_POST['folder_id'] === $folder['id']){ echo "selected";} } ?>><?php echo $folder['title'];?></option>
         <?php }?>
