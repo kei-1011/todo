@@ -51,7 +51,7 @@ class Folder extends \MyApp\Controller {
       'title' => h($_POST['title']),
     ]);
 
-    header('Location: '.SITE_URL);
+    header('Location: '.SITE_URL.'add_folder.php');
     exit();
   }
 
