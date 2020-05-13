@@ -398,7 +398,7 @@ td.todo__list--time.over {
   justify-content: space-between;
 }
 
-.btn-wrap .back {
+.link {
   color:#0566D6;
   text-decoration: underline;
 }

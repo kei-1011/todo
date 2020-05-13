@@ -16,7 +16,7 @@ $folder->run();
       <p class="error"><?php echo h($folder->getErrors('folder'));?></p>
     </div>
     <div class="btn-wrap">
-      <a href="index.php" class="back">戻る</a>
+      <a href="index.php" class="link">戻る</a>
       <button type="submit" class="button btn__add-folder" name="mode" value="create">追加</button>
     </div>
     <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">

@@ -30,10 +30,11 @@ $folders = $folder->getAll();
         <?php }?>
       </select>
       <p class="error"><?php echo h($todo->getErrors('folder'));?></p>
+      <a href="add_folder.php" class="link">フォルダを追加する</a>
     </div>
     <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
     <div class="btn-wrap">
-      <a href="index.php" class="back">戻る</a>
+      <a href="index.php" class="link">戻る</a>
       <button type="submit" class="button btn__add-todo" name="mode" value="create">追加</button>
     </div>
   </form>
