@@ -41,7 +41,7 @@
         <tr id="todo_row_<?php echo $task['id']; ?>" class="todo_row">
           <td class="todo__list--title" data-id="<?php echo $task['id']; ?>">
           <?php if($task['status'] !== '2'){?>
-            <button type="button" class="js_update_todo">Done</button>
+            <button type="button" class="js_update_todo"><i class="fas fa-check"></i></button>
           <?php } ?>
             <?php echo $task['title']; ?>
           </td>

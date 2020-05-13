@@ -3,12 +3,12 @@
     <div class="row">
       <label for="title">タイトル</label>
       <input type="text" name="title" id="title" class="input-text" value="<?php echo $res[0]['title'];?>">
-      <p class="error"><?php echo h($todo->getErrors('title'));?></p>
+      <p class="error"><?php echo h($update_todo->getErrors('title'));?></p>
     </div>
     <div class="row">
       <label for="due_date">期限</label>
       <input type="text" name="due_date" id="datetimepicker" class="input-text" autocomplete="off" value="<?php echo $res[0]['due_date'];?>">
-      <p class="error"><?php echo h($todo->getErrors('due_date'));?></p>
+      <p class="error"><?php echo h($update_todo->getErrors('due_date'));?></p>
     </div>
     <div class="row">
       <label for="status">状態</label>
@@ -27,7 +27,7 @@
         <option value="<?php echo $value['id'];?>" <?php if($value['id'] === $res[0]['folder_id']){ echo "selected"; }?>><?php echo $value['title']; ?></option>
       <?php } ?>
       </select>
-      <p class="error"><?php echo h($todo->getErrors('folder'));?></p>
+      <p class="error"><?php echo h($update_todo->getErrors('folder'));?></p>
     </div>
 
     <div class="btn-wrap">
