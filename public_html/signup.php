@@ -7,16 +7,7 @@ $app = new MyApp\Controller\Signup();
 $app->run();
 
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>新規登録</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <div class="container">
+  <div class="container login">
     <div class="login_wrapper">
       <h2 class="mb-3">新規登録</h2>
       <form action="" method="post">
