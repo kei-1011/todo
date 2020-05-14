@@ -31,7 +31,7 @@
     </div>
 
     <div class="btn-wrap">
-    <a href="<?php echo SITE_URL;?>" class="link">戻る</a>
+    <a href="javascript:history.back();" class="link">戻る</a>
     <div class="right">
       <button type="submit" id="delete_btn" class="button delete_todo" name="mode" value="delete">削除</button>
       <button type="submit" class="button btn__update-todo" name="mode" value="update">更新</button>
