@@ -58,7 +58,7 @@ class Todo extends \MyApp\Controller {
         'title' => h($_POST['title']),
         'due_date' => h($_POST['due_date'])
       ]);
-      header('Location: '.SITE_URL.'post.php?type=todo');
+      header('Location: '.SITE_URL.'/post.php?type=todo');
       exit();
     }
   }

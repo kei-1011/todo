@@ -2,9 +2,9 @@
 
 //セッションスタート
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
+// require_once($_SERVER['DOCUMENT_ROOT'].'/lib/Controller/Todo.php');
+// require_once($_SERVER['DOCUMENT_ROOT'].'/lib/Controller/Folder.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/lib/Controller/Todo.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/lib/Controller/Folder.php');
 
 ?>
 <!DOCTYPE html>

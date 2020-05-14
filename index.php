@@ -1,8 +1,9 @@
 <?php
-
-require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 $app = new MyApp\Controller\Index();
 $app->run();
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 // 登録したタスクをリスト表示させる
 
 $todo = new MyApp\Model\Todo();

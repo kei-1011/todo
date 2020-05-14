@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 ini_set('display_errors', 1); //エラー表示
 
@@ -20,3 +19,4 @@ try {
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/functions.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/autoload.php');
+session_start();
