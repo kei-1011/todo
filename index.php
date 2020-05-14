@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 $app = new MyApp\Controller\Index();
 $app->run();
 // 登録したタスクをリスト表示させる
@@ -23,7 +23,7 @@ if(isset($_GET['folder_id'])) {
 
 ?>
 <main class="top">
-  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/folders.php');?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/folders.php');?>
 
   <div id="container" class="container">
   <?php if(isset($_GET['status'])) { ?>
@@ -47,7 +47,7 @@ if(isset($_GET['folder_id'])) {
           </thead>
           <tbody>
 
-          <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/tasks.php');?>
+          <?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/tasks.php');?>
 
           </tbody>
         </table>
@@ -56,4 +56,4 @@ if(isset($_GET['folder_id'])) {
   </div><!--container-->
 </main>
 <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>

@@ -18,7 +18,7 @@
         <?php }?>
       </select>
       <p class="error"><?php echo h($todo->getErrors('folder'));?></p>
-      <a href="add_folder.php" class="link">フォルダを追加する</a>
+      <a href="/add_folder.php" class="link">フォルダを追加する</a>
     </div>
     <input type="hidden" name="token" id="token" value="<?php echo h($_SESSION['token']);?>">
     <div class="btn-wrap">
