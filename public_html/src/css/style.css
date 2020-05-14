@@ -350,11 +350,11 @@ td.todo__list--time.over {
 .folder .graph .bar .done{
   height: 30px;
   background: #ffb901;
-  width: 30%;
   padding: 6px 10px;
   color: #fff;
   border-radius: 2px;
   font-size: 14px;
+  transition: width 0.5s;
 }
 
 /* add_todo

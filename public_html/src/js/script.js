@@ -12,10 +12,9 @@ $(function () {
   });
 
   function todoCountBar() {
-    let allCount  = $('#todo_count').data('count');
-    let doneCount = $('#done_count').data('count');
+    let allCount  = Number($('#todo_count').val());
+    let doneCount = Number($('#done_count').val());
     let progress = ((doneCount / (allCount + doneCount)) * 100) + '%';
-
     $('.js-done-bar').css('width', progress);
   }
   todoCountBar();
