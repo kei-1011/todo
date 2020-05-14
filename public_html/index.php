@@ -26,7 +26,13 @@ if(isset($_GET['folder_id'])) {
   <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/folders.php');?>
 
   <div id="container" class="container">
-    <h2 class="mb-3"><?php if(isset($_GET['folder_id'])){ echo $get_folder[0]['title']. 'の';} ?>タスク一覧</h2>
+  <?php if(isset($_GET['status'])) { ?>
+    <h2 class="mb-3">完了済タスク一覧</h2>
+  <?php } else if(isset($_GET['folder_id'])) { ?>
+    <h2 class="mb-3"><?php echo $get_folder[0]['title'];?>のタスク一覧</h2>
+  <?php } else { ?>
+    <h2 class="mb-3">全てのタスク一覧</h2>
+  <?php }?>
     <div class="todo-list">
 
       <div id="todos" class="todos">

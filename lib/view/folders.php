@@ -17,7 +17,7 @@ if(isset($_GET['type'])) {
       <li><a href="<?php echo SITE_URL;?>post.php?type=folder" class="<?php if($post_type === 'folder') { echo 'current'; }?>">+ フォルダ追加</a></li>
     </ul>
     <ul class="folder-list">
-      <li class="folder-item"><a href="<?php echo SITE_URL;?>" class="folder-link full <?php if($url === SITE_URL){ echo "current";} ?>">全てのフォルダ</a></li>
+      <li class="folder-item"><a href="<?php echo SITE_URL;?>" class="folder-link full <?php if($url === SITE_URL){ echo "current";} ?>">全て</a></li>
       <?php foreach($folders as $folder){?>
       <li class="folder-item">
         <a href="<?php echo SITE_URL;?>?folder_id=<?php echo $folder['id'];?>" class="folder-link <?php if(isset($folder_id)){ if($folder_id === $folder['id']) { echo 'current'; } }?>">
@@ -27,7 +27,7 @@ if(isset($_GET['type'])) {
         </li>
       <?php }?>
 
-        <li class="folder-item"><a href="<?php echo SITE_URL;?>?status=2" class="folder-link full-done <?php if(isset($_GET['status'])){ echo "current";}?>">完了済のタスク</a></li>
+        <li class="folder-item"><a href="<?php echo SITE_URL;?>?status=2" class="folder-link full-done <?php if(isset($_GET['status'])){ echo "current";}?>">完了済</a></li>
       </ul>
       <input type="hidden" class='js-todo-count' id='todo_count' name="count" value='<?php echo $todo->allCount();?>'>
       <input type="hidden" class='js-todo-count' id='done_count' name="done_count" value='<?php echo $todo->doneCount();?>'>
