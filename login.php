@@ -1,9 +1,9 @@
 <?php
 // ログイン
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 $app = new MyApp\Controller\Login();
 $app->run();
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 
 ?>
   <div class="container login">
@@ -25,4 +25,4 @@ $app->run();
       </form>
     </div>
   </div>
-  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>

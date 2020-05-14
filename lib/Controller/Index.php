@@ -15,7 +15,7 @@ class Index extends \MyApp\Controller {
     // login状態を調べる
     if(!$this->isLoggedIn()) {
       // ログインしていなかったら、ログイン画面に飛ばす
-      header('Location:'. SITE_URL . '/login.php');
+      header('Location:'.SITE_URL.'/login.php');
       exit();
 
     } else {

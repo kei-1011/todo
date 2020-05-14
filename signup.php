@@ -1,11 +1,11 @@
 <?php
 // 新規登録
-
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 
 $app = new MyApp\Controller\Signup();
 $app->run();
 
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 ?>
   <div class="container login">
     <div class="login_wrapper">
@@ -32,4 +32,4 @@ $app->run();
       </form>
     </div>
   </div>
-  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>
