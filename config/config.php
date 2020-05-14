@@ -5,9 +5,9 @@ ini_set('display_errors', 1); //エラー表示
 
 date_default_timezone_set('Asia/Tokyo');
 
-define('DSN', 'mysql:dbname=kaylife_todoapp;host=mysql1.php.xdomain.ne.jp;charset=utf8');
-define('DB_USERNAME', 'kaylife_root');
-define('DB_PASSWORD', 'kouhei3387');
+define('DSN', 'mysql:dbname=todo_app;host=localhost;charset=utf8');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'root');
 
 define('SITE_URL', 'http://'. $_SERVER['HTTP_HOST']);
 // DB接続情報
