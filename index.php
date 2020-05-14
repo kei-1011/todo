@@ -42,7 +42,11 @@ if(isset($_GET['folder_id'])) {
             <tr>
               <th class="todo__list--title">タイトル</th>
               <th class="todo__list--time">期限</th>
+              <?php if(isset($_GET['status'])) { ?>
+              <th class="todo__list--update">作業時間</th>
+              <?php } else{ ?>
               <th class="todo__list--update">状態</th>
+              <?php } ?>
               <th></th>
             </tr>
           </thead>

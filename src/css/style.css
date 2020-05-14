@@ -360,7 +360,7 @@ td.todo__list--time.over {
   border-radius: 2px;
   font-size: 14px;
   transition: width 1s ease-in-out;
-  width: 0px;
+  /* width: 0px; */
 }
 
 /* add_todo
