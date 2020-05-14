@@ -1,5 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
+$login = new MyApp\Controller\Index();
+$login->run();
 $update_todo = new MyApp\Controller\Todo();
 $todo = new MyApp\Model\Todo();
 
@@ -11,7 +13,6 @@ if(isset($_GET['folder_id'])) {
   $res = $todo->getTaskSortId();
   $update_todo->run();
 }
-
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 ?>
