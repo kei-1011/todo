@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/../config/config.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/Controller/Todo.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/Controller/Todo.php');
 
 // ! TODO ajax 処理
 $todoApp = new MyApp\Controller\Todo();

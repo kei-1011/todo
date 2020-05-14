@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 ini_set('display_errors', 1); //エラー表示
 
@@ -8,7 +9,7 @@ define('DSN', 'mysql:dbname=todo_app;host=localhost;charset=utf8');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'root');
 
-define('SITE_URL', 'http://'. $_SERVER['HTTP_HOST'].'/');
+define('SITE_URL', 'http://'. $_SERVER['HTTP_HOST']);
 // DB接続情報
 try {
   $dbh = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
@@ -17,6 +18,5 @@ try {
 }
 
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/../config/functions.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/../config/autoload.php');
-session_start();
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/functions.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/autoload.php');

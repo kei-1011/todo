@@ -1,12 +1,12 @@
 <?php
 // ログイン
-require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/header.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 $app = new MyApp\Controller\Login();
 $app->run();
+require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/header.php');
 
 ?>
-  <div class="container">
+  <div class="container login">
     <div class="login_wrapper">
     <h2 class="mb-3">ログイン</h2>
       <form action="" method="post">
@@ -25,4 +25,4 @@ $app->run();
       </form>
     </div>
   </div>
-  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/../lib/view/footer.php');?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT'].'/lib/view/footer.php');?>
