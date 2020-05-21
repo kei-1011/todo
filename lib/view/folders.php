@@ -17,8 +17,8 @@ if(isset($_GET['type'])) {
     <button type="button" id="drawer"><i class="far fa-arrow-alt-circle-left"></i></button>
     <a href="<?php echo SITE_URL;?>" class="logo">TodoApp</a>
     <ul class="add_menu">
-      <li><a href="<?php echo SITE_URL;?>/post.php?type=todo" class="<?php if($post_type === 'todo') { echo 'current'; }?>">+ タスク追加</a></li>
-      <li><a href="<?php echo SITE_URL;?>/post.php?type=folder" class="<?php if($post_type === 'folder') { echo 'current'; }?>">+ フォルダ追加</a></li>
+      <li><a href="<?php echo SITE_URL;?>/post.php?type=todo" class="<?php if(isset($post_type)){ if($post_type === 'todo') { echo 'current'; } } ?>">+ タスク追加</a></li>
+      <li><a href="<?php echo SITE_URL;?>/post.php?type=folder" class="<?php if(isset($post_type)){ if($post_type === 'folder') { echo 'current'; } }?>">+ フォルダ追加</a></li>
     </ul>
     <ul class="folder-list">
       <li class="folder-item"><a href="<?php echo SITE_URL;?>" class="folder-link full <?php if($url === SITE_URL){ echo "current";} ?>">全て</a></li>
